@@ -85,6 +85,13 @@ int CScore::AddScore(int nValue)
 {
 	m_nSocreDest += nValue;
 
+	if (m_nSocreDest <= 0)
+	{
+		m_nSocreDest = 0;
+	}
+
+
+
 	return nValue;
 }
 
