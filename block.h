@@ -4,6 +4,8 @@
 // Author:石原颯馬
 //
 //=====================================================
+#ifndef _BLOCK_H_
+#define _BLOCK_H_
 #include "object2D.h"
 
 //ブロッククラス
@@ -27,14 +29,17 @@ public:
 	void Uninit(void);	// 終了処理
 	void Update(void);	// 更新処理
 	void Draw(void);	// 描画処理
-	static CBlock *Create(int nPriority = PRIORITY_DEFAULT);	// 生成処理
+	static CBlock *Create(int nPriority = PRIORITY_DEFAULT);		// 生成処理
 
 	//取得
-	TYPE GetType(void) { return m_type; }
+	TYPE GetType(void) { return m_type; }							//ブロック種類（ブロック・とげ等）取得
 
 	//設定
-	void SetType(TYPE type) { m_type = type; }
+	void SetType(const TYPE type) { m_type = type; }				//ブロック種類（ブロック・とげ等）設定
 
 private:
-	TYPE m_type;
+	bool CheckOutOfRange(void);	//範囲外チェック
+	
+	TYPE m_type;			//ブロック種類
 };
+#endif // !_BLOCK_H_
