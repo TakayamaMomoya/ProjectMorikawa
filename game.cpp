@@ -212,11 +212,20 @@ void CGame::Update(void)
 		{// スコア保存
 			CManager::SetScore(m_pScore->GetScore());
 		}
-		m_fGameSpeed = 0.0f;
-
-		m_pBlockManager->SetSpeed(0.0f);
 
 		CPlayer::Player* pPlayerInfo = m_pPlayer->GetInfo();
+
+		if (pPlayerInfo->bJump == false && m_state != STATE_RESULT)
+		{//ゲーム終了後着地したらスクロール止める
+			pPlayerInfo->move = D3DXVECTOR3(m_pBlockManager->GetSpeed() * 3.0f, 0.0f, 0.0f);
+
+			m_fGameSpeed = 0.0f;
+
+			m_pBlockManager->SetSpeed(0.0f);
+
+			SetState(STATE_RESULT);
+		}
+
 		if (pPlayerInfo->pos.x - pPlayerInfo->pTram->GetWidth() >= SCREEN_WIDTH && pFade->GetState() == CFade::FADE_NONE)
 		{//画面外に出た
 			if (m_pResult == nullptr && m_pResultScore == nullptr)
