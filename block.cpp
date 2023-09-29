@@ -135,7 +135,7 @@ void CBlock::ManageHit(CObject *pObj)
 		break;
 	case CBlock::TYPE_BONUS:
 
-		CDebrisSpawner::Create(GetPosition(), 10.0f, 2, 15);
+		CDebrisSpawner::Create(GetPosition(), 20.0f, 2, 30,CDebrisSpawner::TYPE_BONUS);
 
 		if (pScore != nullptr)
 		{

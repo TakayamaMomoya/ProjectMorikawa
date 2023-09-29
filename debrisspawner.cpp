@@ -10,6 +10,8 @@
 //*****************************************************
 #include "debrisspawner.h"
 #include "debris.h"
+#include "manager.h"
+#include "texture.h"
 
 //=====================================================
 // 優先順位を決めるコンストラクタ
@@ -57,6 +59,12 @@ void CDebrisSpawner::Update(void)
 	int nLife;
 	CDebris *pDebris;
 
+	char *aPath[TYPE_MAX] = 
+	{
+		"data\\TEXTURE\\BLOCK\\fragment.png",
+		"data\\TEXTURE\\BLOCK\\fragment01.png",
+	};
+
 	for (int nCnt = 0; nCnt < m_nNumDebris; nCnt++)
 	{
 		nLife = rand() % 50 + 10;
@@ -70,6 +78,10 @@ void CDebrisSpawner::Update(void)
 		pDebris = CDebris::Create(m_pos, nLife);
 
 		pDebris->SetMove(move);
+
+		int nIdx = CManager::GetTexture()->Regist(aPath[m_type]);
+		pDebris->SetIdxTexture(nIdx);
+		pDebris->SetVtx();
 	}
 
 	m_nLife--;
