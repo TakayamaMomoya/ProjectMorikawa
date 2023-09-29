@@ -8,6 +8,12 @@
 #include "manager.h"
 #include "texture.h"
 
+//静的メンバ変数
+const int CBlockManager::m_aUpDown[BLOCK_CREATE_NUM - MAX_NEEDLE + 2][2] =
+{
+	{80,20},{65,35},{50,50},{35,65},{20,80}
+};
+
 //いったんファイルパス
 const char* g_apFilePath[CBlock::TYPE_MAX] =
 {
@@ -134,8 +140,8 @@ void CBlockManager::Update(void)
 	//高さ変更チェック
 	if (m_nChangeNeedleHeight <= 0)
 	{//変更する
-		int nRand = rand() % 2;
-		m_nNeedleHeight += (nRand == 0) ? -1 : 1;	//高さ変更
+		int nRand = rand() % (m_aUpDown[m_nNeedleHeight + 1][0] + m_aUpDown[m_nNeedleHeight + 1][1]);
+		m_nNeedleHeight += (nRand < m_aUpDown[m_nNeedleHeight + 1][0]) ? 1 : -1;	//高さ変更
 
 		//最低を下回らないようにする
 		if (m_nNeedleHeight < MIN_NEEDLE)
