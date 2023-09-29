@@ -16,8 +16,8 @@
 // マクロ定義
 //*****************************************************
 #define SIZE_DEFAULT	(32.0f)	// デフォルトのサイズ
-#define NORMAL_SCORE	(500)	// 通常スコア
-#define BONUS_SCORE	(5000)	// ボーナススコア
+#define NORMAL_SCORE	(200)	// 通常スコア
+#define BONUS_SCORE	(1500)	// ボーナススコア
 
 //=====================================
 //コンストラクタ
@@ -78,7 +78,7 @@ void CBlock::Uninit(void)
 void CBlock::Update(void)
 {
 	CBlockManager* pBlockManager = CGame::GetBlockManager();
-	CObject2D::SetMove(D3DXVECTOR3(-pBlockManager->GetSpeed(), 0.0f, 0.0f));	//移動量設定
+	CObject2D::SetMove(D3DXVECTOR3(-pBlockManager->GetSpeed() * CGame::GetGameSpeed(), 0.0f, 0.0f));	//移動量設定
 
 	if (CheckOutOfRange() == true)
 	{//範囲外に出た

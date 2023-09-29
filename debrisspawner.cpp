@@ -63,6 +63,7 @@ void CDebrisSpawner::Update(void)
 	{
 		"data\\TEXTURE\\BLOCK\\fragment00.png",
 		"data\\TEXTURE\\BLOCK\\fragment01.png",
+		"data\\TEXTURE\\BLOCK\\fragment02.png",
 	};
 
 	for (int nCnt = 0; nCnt < m_nNumDebris; nCnt++)
@@ -82,6 +83,11 @@ void CDebrisSpawner::Update(void)
 		int nIdx = CManager::GetTexture()->Regist(aPath[m_type]);
 		pDebris->SetIdxTexture(nIdx);
 		pDebris->SetVtx();
+
+		if (m_type == TYPE_DAMAGE)
+		{
+			pDebris->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
+		}
 	}
 
 	m_nLife--;

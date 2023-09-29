@@ -48,6 +48,14 @@ public:
 	void Hit(float fDamage);
 
 private:
+	enum STATE
+	{
+		STATE_NONE = 0,	// 何でもない状態
+		STATE_NORMAL,	// 通常状態
+		STATE_DAMAGE,	// ダメージ状態
+		STATE_MAX
+	};
+
 	void Input(void);	// 操作処理
 	void InputJump(void);	// ジャンプ操作
 	void ManageMove(void);	// 移動の管理
@@ -61,6 +69,7 @@ private:
 
 	Player m_player;	// プレイヤー情報
 	CCollisionSphere *m_pCollisionSphere;	// 球の当たり判定
+	STATE m_state;	// 状態
 };
 
 #endif

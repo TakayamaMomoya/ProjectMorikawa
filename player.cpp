@@ -21,6 +21,9 @@
 #include "collision.h"
 #include "arrow.h"
 #include "timer.h"
+#include "score.h"
+#include "bonus.h"
+#include "debrisspawner.h"
 
 //*****************************************************
 // マクロ定義
@@ -40,6 +43,7 @@
 #define MAX_CHARGE	(0.5f)	// チャージの最大値
 #define JUMP_BUTTON	(DIK_SPACE)	// ジャンプキー
 #define ROLL_SPEED	(0.6f)	// 回転速度
+#define DAMAGE_SCORE	(-5000)	// 減点
 
 //=====================================================
 // 優先順位を決めるコンストラクタ
@@ -47,6 +51,8 @@
 CPlayer::CPlayer(int nPriority)
 {
 	ZeroMemory(&m_player,sizeof(Player));
+
+	m_state = STATE_NONE;
 }
 
 //=====================================================
@@ -62,6 +68,8 @@ CPlayer::~CPlayer()
 //=====================================================
 HRESULT CPlayer::Init(void)
 {
+	m_state = STATE_NORMAL;
+
 	// 見た目の生成
 	m_player.pBody = CObject2D::Create(7);
 
@@ -282,6 +290,8 @@ void CPlayer::Land(void)
 
 		pBody->SetVtx();
 	}
+
+	m_state = STATE_NORMAL;
 }
 
 //=====================================================
@@ -355,7 +365,26 @@ void CPlayer::FollowTram(void)
 //=====================================================
 void CPlayer::Hit(float fDamage)
 {
-	m_player.move.y += GRAVITY;
+	if (m_state == STATE_DAMAGE)
+	{
+		return;
+	}
+
+	// スコア取得
+	CScore *pScore = CGame::GetScore();
+
+	m_player.move.y = GRAVITY;
+
+	if (pScore != nullptr)
+	{
+		pScore->AddScore(DAMAGE_SCORE);
+	}
+
+	CBonus::Create(m_player.pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f), DAMAGE_SCORE);
+
+	m_state = STATE_DAMAGE;
+
+	CDebrisSpawner::Create(m_player.pos, 20.0f, 1, 15, CDebrisSpawner::TYPE_DAMAGE);
 }
 
 //=====================================================

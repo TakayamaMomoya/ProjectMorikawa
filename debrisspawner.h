@@ -23,6 +23,7 @@ public:
 	{
 		TYPE_NORMAL = 0,	// 通常
 		TYPE_BONUS,	// ボーナス
+		TYPE_DAMAGE,	// ダメージ
 		TYPE_MAX
 	};
 

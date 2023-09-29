@@ -58,6 +58,8 @@ public:
 	static float GetGameSpeed(void) { return m_fGameSpeed; }
 
 private:
+	void ManageSpeed(void);
+
 	static CScore *m_pScore;	// スコアのポインタ
 	static CTimer *m_pTimer;	// タイマーのポインタ
 	static CPlayer *m_pPlayer;	// プレイヤーのポインタ
@@ -67,6 +69,7 @@ private:
 	static CNumber* m_pResultScore;	//リザルトのスコア
 	static STATE m_state;	// 状態
 	static float m_fGameSpeed;	// ゲームのスピード
+	int m_nCntSecond;	// 一秒カウンター
 };
 
 #endif
