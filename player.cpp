@@ -24,6 +24,7 @@
 #include "score.h"
 #include "bonus.h"
 #include "debrisspawner.h"
+#include "blockmanager.h"
 
 //*****************************************************
 // ƒ}ƒNƒ’è‹`
@@ -155,10 +156,6 @@ void CPlayer::Update(void)
 	{//ŠÔ‚ª‚ ‚éŒÀ‚è“®‚©‚¹‚é‚æ‚¤‚É‚·‚é
 		// ‘€ìˆ—
 		Input();
-	}
-	else if(m_player.bJump == false)
-	{
-		m_player.move = D3DXVECTOR3(5.0f, 0.0f, 0.0f);
 	}
 
 	// ˆÚ“®‚ÌŠÇ—
