@@ -123,6 +123,7 @@ CBonus *CBonus::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, int nValue)
 
 		if (pBonus->m_pNumber == nullptr)
 		{// ”Žš‚Ì¶¬
+
 			pBonus->m_pNumber = CNumber::Create(NUM_PLACE,nValue);
 
 			if (pBonus->m_pNumber != nullptr)
@@ -136,6 +137,15 @@ CBonus *CBonus::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, int nValue)
 				else
 				{
 					pBonus->m_pNumber->SetSizeAll(BONUS_WIDTH, BONUS_HEIGHT);
+				}
+
+				if (nValue < 0)
+				{
+					nValue *= -1;
+
+					pBonus->m_pNumber->SetValue(nValue, NUM_PLACE);
+
+					pBonus->m_pNumber->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 				}
 			}
 		}
