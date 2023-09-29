@@ -16,6 +16,7 @@
 #include "inputkeyboard.h"
 #include "inputjoypad.h"
 #include "debugproc.h"
+#include "universal.h"
 
 //*****************************************************
 // マクロ定義
@@ -23,15 +24,18 @@
 #define BODY_PATH	"data\\TEXTURE\\CHARACTER\\player.png"	// 見た目のパス
 #define TRAM_PATH	"data\\TEXTURE\\CHARACTER\\tram.png"	// トロッコのパス
 #define FLOOR_LIMIT	(SCREEN_HEIGHT * 0.9f)	// 床の制限
-#define BODY_WIDTH	(50.0f)	// 体の幅
-#define BODY_HEIGHT	(100.0f)	// 体の高さ
-#define TRAM_WIDTH	(100.0f)	// トロッコの幅
-#define TRAM_HEIGHT	(50.0f)	// トロッコの高さ
+#define BODY_WIDTH	(25.0f)	// 体の幅
+#define BODY_HEIGHT	(50.0f)	// 体の高さ
+#define TRAM_WIDTH	(50.0f)	// トロッコの幅
+#define TRAM_HEIGHT	(25.0f)	// トロッコの高さ
 #define TRAM_POSY	(FLOOR_LIMIT - TRAM_HEIGHT)	// トロッコのY座標
 #define MAX_JUMP (30.0f)	// ジャンプ力
 #define GRAVITY	(0.98f)	// 重力
-#define CHARGE_POWER	(0.01f)	// 1フレームあたりに溜まるジャンプ力
+#define CHARGE_POWER	(0.010f)	// 1フレームあたりに溜まるジャンプ力
+#define CHARGE_INTIIAL	(0.5f)	// 初動のジャンプ力
 #define MAX_CHARGE	(1.0f)	// チャージの最大値
+#define JUMP_BUTTON	(DIK_SPACE)	// ジャンプキー
+#define ROLL_SPEED	(0.6f)	// 回転速度
 
 //=====================================================
 // 優先順位を決めるコンストラクタ
@@ -120,6 +124,9 @@ void CPlayer::Update(void)
 	// 位置の制限
 	LimitPos();
 
+	// 回転の管理
+	ManageRoll();
+
 	// 体の追従
 	FollowBody();
 
@@ -132,15 +139,32 @@ void CPlayer::Update(void)
 //=====================================================
 void CPlayer::Input(void)
 {
+	if (m_player.bJump == false)
+	{
+		// ジャンプ操作
+		InputJump();
+	}
+}
+
+//=====================================================
+// ジャンプ操作
+//=====================================================
+void CPlayer::InputJump(void)
+{
 	CInputKeyboard *pKeyboard = CManager::GetKeyboard();
 	CInputJoypad *pJoypad = CManager::GetJoypad();
 
 	if (pKeyboard == nullptr || pJoypad == nullptr)
-	{
+	{// 入力に不具合あったら通らない
 		return;
 	}
 
-	if (pKeyboard->GetPress(DIK_SPACE))
+	if (pKeyboard->GetTrigger(JUMP_BUTTON))
+	{// ジャンプ溜め初動
+		m_player.fPowJump += CHARGE_INTIIAL;
+	}
+
+	if (pKeyboard->GetPress(JUMP_BUTTON))
 	{// ジャンプ溜め
 		m_player.fPowJump += CHARGE_POWER;
 
@@ -150,11 +174,13 @@ void CPlayer::Input(void)
 		}
 	}
 
-	if (pKeyboard->GetRelease(DIK_SPACE))
+	if (pKeyboard->GetRelease(JUMP_BUTTON))
 	{// ジャンプ操作
 		m_player.move.y -= MAX_JUMP * m_player.fPowJump;
 
 		m_player.fPowJump = 0.0f;
+
+		m_player.bJump = true;
 	}
 }
 
@@ -168,6 +194,78 @@ void CPlayer::ManageMove(void)
 
 	// 位置に移動量を反映
 	m_player.pos += m_player.move;
+}
+
+//=====================================================
+// 位置制限処理
+//=====================================================
+void CPlayer::LimitPos(void)
+{
+	if (m_player.pos.y >= FLOOR_LIMIT - BODY_WIDTH)
+	{// 床との制限
+		m_player.pos.y = FLOOR_LIMIT - BODY_WIDTH;
+
+		m_player.move.y = 0.0f;
+
+		if (m_player.bJump)
+		{// 着地処理
+			Land();
+		}
+	}
+}
+
+//=====================================================
+// 着地処理
+//=====================================================
+void CPlayer::Land(void)
+{
+	if (m_player.bJump == false)
+	{// 既に着地していたら通らない
+		return;
+	}
+
+	// 着地状態にする
+	m_player.bJump = false;
+
+	// 体の向きのリセット
+	CObject2D *pBody = m_player.pBody;
+
+	if (pBody != nullptr)
+	{
+		pBody->SetRot(0.0f);
+
+		pBody->SetVtx();
+	}
+}
+
+//=====================================================
+// 回転の管理
+//=====================================================
+void CPlayer::ManageRoll(void)
+{
+	// 汎用処理の取得
+	CUniversal *pUniversal = CManager::GetUniversal();
+
+	if (m_player.bJump)
+	{// 回転させる
+		CObject2D *pBody = m_player.pBody;
+		float fRot = 0.0f;
+
+		if (pBody == nullptr)
+		{
+			return;
+		}
+
+		// 向き取得
+		fRot = pBody->GetRot();
+
+		// 回転させる
+		fRot -= ROLL_SPEED;
+
+		pUniversal->LimitRot(&fRot);	// 角度制限
+
+		pBody->SetRot(fRot);
+	}
 }
 
 //=====================================================
@@ -204,19 +302,6 @@ void CPlayer::FollowTram(void)
 	pTram->SetPosition(D3DXVECTOR3(m_player.pos.x, TRAM_POSY, 0.0f));
 
 	pTram->SetVtx();
-}
-
-//=====================================================
-// 位置制限処理
-//=====================================================
-void CPlayer::LimitPos(void)
-{
-	if (m_player.pos.y >= FLOOR_LIMIT - BODY_WIDTH)
-	{// 床との制限
-		m_player.pos.y = FLOOR_LIMIT - BODY_WIDTH;
-
-		m_player.move.y = 0.0f;
-	}
 }
 
 //=====================================================

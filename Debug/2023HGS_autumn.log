@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+﻿  2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn - コピー\2023HGS_autumn.exe
+  2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn - コピー\2023HGS_autumn.pdb (Full PDB)
+=======
 ﻿  title.cpp
   game.cpp
   blockmanager.cpp
@@ -8,3 +12,4 @@
   LINK : 前回のインクリメンタル リンクで C:\Users\student\Source\Repos\TakayamaMomoya\ProjectMorikawa\2023HGS_autumn.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
   2023HGS_autumn.vcxproj -> C:\Users\student\Source\Repos\TakayamaMomoya\ProjectMorikawa\2023HGS_autumn.exe
   2023HGS_autumn.vcxproj -> C:\Users\student\Source\Repos\TakayamaMomoya\ProjectMorikawa\2023HGS_autumn.pdb (Full PDB)
+>>>>>>> 9932107e51c6b138a6311e45320a852f62631db5
