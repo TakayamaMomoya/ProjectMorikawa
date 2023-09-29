@@ -13,6 +13,10 @@
 //いったんマクロ
 #define BLOCK_CREATE_NUM	(6)		//一度に配置するブロック数
 #define BLOCK_START_HEIGHT	(96.0f)	//1つ目のブロック配置高さ
+#define MIN_NEEDLE			(-1)	//とげ最低高さ
+#define MAX_NEEDLE			(4)		//とげ最高高さ
+#define MIN_CHANGE_NUM		(3)		//最低限変えない配置回数
+#define CHANGE_NUM_DEGREE	(3)		//配置回数の振れ幅
 
 //ブロッククラス
 class CBlockManager : public CObject
@@ -38,5 +42,7 @@ public:
 private:
 	CBlock* m_apBlock[BLOCK_CREATE_NUM];	//最近配置したブロックオブジェ
 	float m_fSpeed;							//ブロックスクロール速度
+	int m_nNeedleHeight;					//とげを置く高さ
+	int m_nChangeNeedleHeight;				//とげの高さを変える配置回数
 };
 #endif // !_BLOCK_MANAGER_H_
