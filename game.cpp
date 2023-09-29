@@ -232,7 +232,7 @@ void CGame::Update(void)
 			{//リザルト表示
 				//リザルト文字
 				m_pResult = CObject2D::Create(CObject::PRIORITY_UI);
-				m_pResult->SetSize(444.0f, 78.0f);
+				m_pResult->SetSize(480.0f, 78.0f);
 				m_pResult->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, 300.0f, 0.0f));
 				m_pResult->SetIdxTexture(CManager::GetTexture()->Regist("data\\TEXTURE\\UI\\yourscore.png"));
 				m_pResult->SetVtx();
