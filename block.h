@@ -45,7 +45,8 @@ public:
 
 private:
 	bool CheckOutOfRange(void);	//範囲外チェック
-	
+	void ManageCollision(void);	// 当たり判定管理
+
 	TYPE m_type;			//ブロック種類
 	CCollisionSphere *m_pCollisionSphere;	// 球の当たり判定
 };

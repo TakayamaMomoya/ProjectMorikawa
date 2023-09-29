@@ -164,6 +164,8 @@
     <ClCompile Include="blockmanager.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="debris.cpp" />
+    <ClCompile Include="debrisspawner.cpp" />
     <ClCompile Include="debugproc.cpp" />
     <ClCompile Include="effect2D.cpp" />
     <ClCompile Include="effect3D.cpp" />
@@ -207,6 +209,8 @@
     <ClInclude Include="blockmanager.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collision.h" />
+    <ClInclude Include="debris.h" />
+    <ClInclude Include="debrisspawner.h" />
     <ClInclude Include="debugproc.h" />
     <ClInclude Include="effect2D.h" />
     <ClInclude Include="effect3D.h" />
