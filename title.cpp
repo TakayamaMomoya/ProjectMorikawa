@@ -56,6 +56,8 @@ CTitle::~CTitle()
 //=====================================================
 HRESULT CTitle::Init(void)
 {
+	CSound *pSound = CManager::GetSound();
+
 	//背景のスクロールスピード設定
 	CGame::SetSpeed(1.0f);
 
@@ -84,6 +86,8 @@ HRESULT CTitle::Init(void)
 		m_pStart->SetVtx();
 	}
 
+	pSound->Play(CSound::LABEL_TITLE);
+
 	return S_OK;
 }
 
@@ -92,6 +96,10 @@ HRESULT CTitle::Init(void)
 //=====================================================
 void CTitle::Uninit(void)
 {
+	CSound *pSound = CManager::GetSound();
+
+	pSound->Stop();
+
 	// オブジェクト全破棄
 	CObject::ReleaseAll();
 }

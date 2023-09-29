@@ -17,7 +17,8 @@ class CSound
 public:
 	typedef enum
 	{
-		LABEL_BGM000 = 0,				// タイトルBGM
+		LABEL_TITLE = 0,				// タイトルBGM
+		LABEL_GAME,				        // ゲームBGM
 		LABELBREAK_SE,                  // 通常ブロック
 		LABELBONUS_SE,                  // ボーナスブロック
 		LABELNEEDLE_SE,                 // ニードルに当たった時
@@ -72,11 +73,12 @@ private:
 	SOUNDINFO m_aSoundInfo[LABEL_MAX] =
 	{
 		{ "data/SOUND/BGM/title.wav", -1 },			// タイトル	
-		{ "data/SE/block_01.wav", 0 },			// 通常ブロック	
-		{ "data/SE/block_02.wav", 0 },			// ボーナス	
-		{ "data/SE/needle.wav", 0 },			// ニードルに当たった時
-		{ "data/SE/jump.wav", 0 },			    // ジャンプしたとき
-		{ "data/SE/tram.wav", -1 },			    // トロッコの音
+		{ "data/SOUND/BGM/game.wav", -1 },			// ゲーム
+		{ "data/SE/block_01.wav", 0 },			    // 通常ブロック	
+		{ "data/SE/block_02.wav", 0 },			    // ボーナス	
+		{ "data/SE/needle.wav", 0 },			    // ニードルに当たった時
+		{ "data/SE/jump.wav", 0 },			        // ジャンプしたとき
+		{ "data/SE/tram.wav", -1 },			        // トロッコの音
 	};
 };
 
