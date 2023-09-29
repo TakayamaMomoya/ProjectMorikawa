@@ -31,6 +31,19 @@ class CBlock;
 class CObject
 {
 public:
+	enum PRIORITY	//優先度設定とかに使って
+	{
+		PRIORITY_BG = 0,	//背景
+		PRIORITY_01,
+		PRIORITY_02,
+		PRIORITY_DEFAULT,	//デフォルト
+		PRIORITY_04,
+		PRIORITY_05,
+		PRIORITY_UI,
+		PRIORITY_FADE,		//フェード
+		PRIORITY_MAX
+	};
+
 	typedef enum
 	{
 		TYPE_NONE = 0,	// 何でもない
