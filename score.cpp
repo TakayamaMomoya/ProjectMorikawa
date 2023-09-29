@@ -99,11 +99,11 @@ CScore *CScore::Create(void)
 
 	if (pObject2D != nullptr)
 	{
-		pObject2D->SetPosition(D3DXVECTOR3(1030.0f, 80.0f, 0.0f));
-		pObject2D->SetSize(70.0f, 35.0f);
+		pObject2D->SetPosition(D3DXVECTOR3(1000.0f, 80.0f, 0.0f));
+		pObject2D->SetSize(75.0f, 40.0f);
 
 		// テクスチャ番号取得
-		int nIdx = CManager::GetTexture()->Regist("data\\TEXTURE\\UI\\scoreBack.png");
+		int nIdx = CManager::GetTexture()->Regist("data\\TEXTURE\\UI\\score.png");
 
 		pObject2D->SetIdxTexture(nIdx);
 		pObject2D->SetVtx();
