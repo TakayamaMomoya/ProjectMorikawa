@@ -18,6 +18,7 @@
 #include "debugproc.h"
 #include "universal.h"
 #include "collision.h"
+#include "arrow.h"
 
 //*****************************************************
 // ƒ}ƒNƒ’è‹`
@@ -98,6 +99,9 @@ HRESULT CPlayer::Init(void)
 			m_pCollisionSphere->SetRadius(fRadius);
 		}
 	}
+
+	// –îˆóİ’è
+	CArrow::Create();
 
 	return S_OK;
 }
