@@ -55,7 +55,7 @@ HRESULT CNumber::Init(void)
 	}
 
 	// テクスチャ番号取得
-	m_nIdxTexture = CManager::GetTexture()->Regist("data\\TEXTURE\\UI\\number001.png");
+	m_nIdxTexture = CManager::GetTexture()->Regist("data\\TEXTURE\\UI\\number002.png");
 
 	for (int nCnt = 0; nCnt < m_nNumPlace; nCnt++)
 	{// テクスチャ番号取得
