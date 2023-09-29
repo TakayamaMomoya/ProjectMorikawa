@@ -149,6 +149,20 @@ void CGame::Uninit(void)
 		m_pBlockManager = nullptr;
 	}
 
+	if (m_pResult != nullptr)
+	{// リザルト文字の破棄
+		m_pResult->Uninit();
+
+		m_pResult = nullptr;
+	}
+
+	if (m_pResultScore != nullptr)
+	{// リザルトスコアの破棄
+		m_pResultScore->Uninit();
+
+		m_pResultScore = nullptr;
+	}
+
 	// オブジェクト全棄
 	CObject::ReleaseAll();
 }
