@@ -24,6 +24,7 @@
 #include "score.h"
 #include "bonus.h"
 #include "debrisspawner.h"
+#include "sound.h"
 
 //*****************************************************
 // マクロ定義
@@ -199,6 +200,7 @@ void CPlayer::InputJump(void)
 {
 	CInputKeyboard *pKeyboard = CManager::GetKeyboard();
 	CInputJoypad *pJoypad = CManager::GetJoypad();
+	CSound *pSound = CManager::GetSound();
 
 	if (pKeyboard == nullptr || pJoypad == nullptr)
 	{// 入力に不具合あったら通らない
@@ -222,6 +224,8 @@ void CPlayer::InputJump(void)
 		m_player.fPowJump = 0.0f;
 
 		m_player.bJump = true;
+
+		pSound->Play(CSound::LABELJUMP_SE);
 	}
 }
 
@@ -365,10 +369,14 @@ void CPlayer::FollowTram(void)
 //=====================================================
 void CPlayer::Hit(float fDamage)
 {
+	CSound *pSound = CManager::GetSound();
+
 	if (m_state == STATE_DAMAGE)
 	{
 		return;
 	}
+
+	pSound->Play(CSound::LABELNEEDLE_SE);
 
 	// スコア取得
 	CScore *pScore = CGame::GetScore();

@@ -21,6 +21,7 @@
 #include "renderer.h"
 #include "sound.h"
 #include "multibg.h"
+#include "game.h"
 
 //*****************************************************
 // マクロ定義
@@ -55,6 +56,9 @@ CTitle::~CTitle()
 //=====================================================
 HRESULT CTitle::Init(void)
 {
+	//背景のスクロールスピード設定
+	CGame::SetSpeed(1.0f);
+
 	// 多重背景の生成
 	CMultiBg *pMultiBg = CMultiBg::Create();
 

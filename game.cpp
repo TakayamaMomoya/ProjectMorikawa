@@ -70,6 +70,8 @@ CGame::~CGame()
 //=====================================================
 HRESULT CGame::Init(void)
 {
+	CSound *pSound = CManager::GetSound();
+
 	m_fGameSpeed = 1.0f;
 
 	CObjectManager *pObjManager = CManager::GetObjectManager();
@@ -106,6 +108,8 @@ HRESULT CGame::Init(void)
 		// ƒvƒŒƒCƒ„[¶¬
 		m_pPlayer = CPlayer::Create();
 	}
+
+	pSound->Play(CSound::LABELTRAM_SE);
 
 	return S_OK;
 }
