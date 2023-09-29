@@ -11,7 +11,7 @@
 //いったんファイルパス
 const char* g_apFilePath[CBlock::TYPE_MAX] =
 {
-	"data\\TEXTURE\\Block_R_01.png",
+	"data\\TEXTURE\\BLOCK\\block_00.png",
 	"data\\TEXTURE\\Block_R_02.png",
 	"data\\TEXTURE\\Block_R_03.png"
 };

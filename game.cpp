@@ -78,7 +78,6 @@ HRESULT CGame::Init(void)
 	if (m_pTimer == nullptr)
 	{// タイマー生成
 		m_pTimer = CTimer::Create();
-		m_pTimer->AddTimer(120);
 		SetState(STATE_NORMAL);
 	}
 
@@ -90,15 +89,6 @@ HRESULT CGame::Init(void)
 
 	// プレイヤー生成
 	CPlayer::Create();
-
-	//ブロック仮置き
-	CBlock* pBlock = CBlock::Create();
-	pBlock->SetSize(32.0f, 32.0f);
-	pBlock->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
-
-	int nIdx = CManager::GetTexture()->Regist("data\\TEXTURE\\Block_R_01.png");
-	pBlock->SetIdxTexture(nIdx);
-	pBlock->SetVtx();
 
 	return S_OK;
 }
@@ -183,6 +173,11 @@ void CGame::Update(void)
 	}
 	if (m_pTimer->GetSecond() <= 0)
 	{
+		if (m_pScore != nullptr)
+		{// スコア保存
+			CManager::SetScore(m_pScore->GetScore());
+		}
+
 		pFade->SetFade(CScene::MODE_RANKING);
 	}
 }

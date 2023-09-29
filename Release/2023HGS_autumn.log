@@ -1,8 +1,12 @@
-﻿  block.cpp
+﻿  blockmanager.cpp
+  game.cpp
+  player.cpp
+  ranking.cpp
+  timer.cpp
   コード生成しています。
-  4 of 478 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  17 of 482 functions ( 3.5%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    24 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
   2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn - コピー\2023HGS_autumn.exe
   2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn - コピー\2023HGS_autumn.pdb (Full PDB)
