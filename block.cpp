@@ -10,6 +10,7 @@
 #include "collision.h"
 #include "debrisspawner.h"
 #include "score.h"
+#include "bonus.h"
 
 //*****************************************************
 // ƒ}ƒNƒ’è‹`
@@ -130,17 +131,21 @@ void CBlock::ManageHit(CObject *pObj)
 			pScore->AddScore(NORMAL_SCORE);
 		}
 
+		CBonus::Create(GetPosition(), GetMove(), NORMAL_SCORE);
+
 		Uninit();
 
 		break;
 	case CBlock::TYPE_BONUS:
 
-		CDebrisSpawner::Create(GetPosition(), 10.0f, 2, 15);
+		CDebrisSpawner::Create(GetPosition(), 20.0f, 2, 30,CDebrisSpawner::TYPE_BONUS);
 
 		if (pScore != nullptr)
 		{
 			pScore->AddScore(BONUS_SCORE);
 		}
+
+		CBonus::Create(GetPosition(), GetMove(), BONUS_SCORE);
 
 		Uninit();
 
