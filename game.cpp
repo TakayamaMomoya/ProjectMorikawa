@@ -78,6 +78,8 @@ HRESULT CGame::Init(void)
 	if (m_pTimer == nullptr)
 	{// タイマー生成
 		m_pTimer = CTimer::Create();
+		m_pTimer->AddTimer(120);
+		SetState(STATE_NORMAL);
 	}
 
 	if (m_pBlockManager == nullptr)
@@ -148,7 +150,7 @@ void CGame::ReleaseScore(void)
 void CGame::ReleaseTimer(void)
 {
 	if (m_pTimer != nullptr)
-	{// スコアの終了・破棄
+	{// タイマーの終了・破棄
 		m_pTimer = nullptr;
 	}
 }
@@ -178,6 +180,10 @@ void CGame::Update(void)
 				pFade->SetFade(CScene::MODE_RANKING);
 			}
 		}
+	}
+	if (m_pTimer->GetSecond() <= 0)
+	{
+		pFade->SetFade(CScene::MODE_RANKING);
 	}
 }
 
