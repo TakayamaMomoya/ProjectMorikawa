@@ -25,11 +25,11 @@
 #define BODY_PATH	"data\\TEXTURE\\CHARACTER\\player.png"	// 見た目のパス
 #define TRAM_PATH	"data\\TEXTURE\\CHARACTER\\tram.png"	// トロッコのパス
 #define FLOOR_LIMIT	(SCREEN_HEIGHT * 0.9f)	// 床の制限
-#define BODY_WIDTH	(25.0f)	// 体の幅
-#define BODY_HEIGHT	(50.0f)	// 体の高さ
-#define TRAM_WIDTH	(50.0f)	// トロッコの幅
-#define TRAM_HEIGHT	(25.0f)	// トロッコの高さ
-#define TRAM_POSY	(FLOOR_LIMIT - TRAM_HEIGHT)	// トロッコのY座標
+#define BODY_WIDTH	(60.0f)	// 体の幅
+#define BODY_HEIGHT	(60.0f)	// 体の高さ
+#define TRAM_WIDTH	(60.0f)	// トロッコの幅
+#define TRAM_HEIGHT	(30.0f)	// トロッコの高さ
+#define TRAM_POSY	(SCREEN_HEIGHT * 0.89f)	// トロッコのY座標
 #define MAX_JUMP (30.0f)	// ジャンプ力
 #define GRAVITY	(0.98f)	// 重力
 #define CHARGE_POWER	(0.010f)	// 1フレームあたりに溜まるジャンプ力

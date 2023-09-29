@@ -78,7 +78,6 @@ HRESULT CGame::Init(void)
 	if (m_pTimer == nullptr)
 	{// タイマー生成
 		m_pTimer = CTimer::Create();
-		m_pTimer->AddTimer(120);
 		SetState(STATE_NORMAL);
 	}
 
@@ -174,6 +173,11 @@ void CGame::Update(void)
 	}
 	if (m_pTimer->GetSecond() <= 0)
 	{
+		if (m_pScore != nullptr)
+		{// スコア保存
+			CManager::SetScore(m_pScore->GetScore());
+		}
+
 		pFade->SetFade(CScene::MODE_RANKING);
 	}
 }
