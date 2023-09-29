@@ -22,7 +22,7 @@
 #define MODE_FACT	(0.9f)	// 移動量の減衰係数
 #define GRAVITY	(0.3f)	// 重力
 #define SIZE_DEFAULT	(10.0f)	// デフォルトのサイズ
-#define TEXTURE_PATH	"data\\TEXTURE\\EFFECT\\debris.png"	// テクスチャのパス
+#define TEXTURE_PATH	"data\\TEXTURE\\BLOCK\\fragment.png"	// テクスチャのパス
 
 //*****************************************************
 // 静的メンバ変数宣言

@@ -45,6 +45,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	Player *GetInfo(void) { return &m_player; }
+	void Hit(float fDamage);
 
 private:
 	void Input(void);	// ‘€ìˆ—
