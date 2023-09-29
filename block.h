@@ -21,6 +21,7 @@ public:
 	enum TYPE
 	{
 		TYPE_BLOCK = 0,
+		TYPE_SPBLOCK,
 		TYPE_NEEDLE,
 		TYPE_BEDROCK,
 		TYPE_MAX

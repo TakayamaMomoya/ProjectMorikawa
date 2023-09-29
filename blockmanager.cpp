@@ -12,6 +12,7 @@
 const char* g_apFilePath[CBlock::TYPE_MAX] =
 {
 	"data\\TEXTURE\\Block_R_01.png",
+	"data\\TEXTURE\\Block_R_04.png",
 	"data\\TEXTURE\\Block_R_02.png",
 	"data\\TEXTURE\\Block_R_03.png"
 };
@@ -26,8 +27,8 @@ CBlockManager::CBlockManager()
 		m_apBlock[cnt] = nullptr;
 	}
 	m_fSpeed = 0.0f;	//速度もいったん0
-	m_nNeedleHeight = -1;
-	m_nChangeNeedleHeight = 5;	//仮
+	m_nNeedleHeight = 0;
+	m_nChangeNeedleHeight = 0;
 }
 
 //=====================================
@@ -42,6 +43,8 @@ CBlockManager::~CBlockManager()
 //=====================================
 HRESULT CBlockManager::Init(void)
 {
+	m_nChangeNeedleHeight = 5;	//仮
+
 	return S_OK;
 }
 
@@ -112,7 +115,8 @@ void CBlockManager::Update(void)
 	//高さ変更チェック
 	if (m_nChangeNeedleHeight <= 0)
 	{//変更する
-		m_nNeedleHeight += rand() % 3 - 1;	//高さ変更
+		int nRand = rand() % 2;
+		m_nNeedleHeight += (nRand == 0) ? -1 : 1;	//高さ変更
 
 		//最低を下回らないようにする
 		if (m_nNeedleHeight < MIN_NEEDLE)

@@ -91,15 +91,6 @@ HRESULT CGame::Init(void)
 	// プレイヤー生成
 	CPlayer::Create();
 
-	//ブロック仮置き
-	CBlock* pBlock = CBlock::Create();
-	pBlock->SetSize(32.0f, 32.0f);
-	pBlock->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
-
-	int nIdx = CManager::GetTexture()->Regist("data\\TEXTURE\\Block_R_01.png");
-	pBlock->SetIdxTexture(nIdx);
-	pBlock->SetVtx();
-
 	return S_OK;
 }
 
