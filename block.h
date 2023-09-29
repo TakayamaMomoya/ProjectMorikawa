@@ -17,6 +17,7 @@ public:
 	{
 		TYPE_BLOCK = 0,
 		TYPE_NEEDLE,
+		TYPE_BEDROCK,
 		TYPE_MAX
 	};
 

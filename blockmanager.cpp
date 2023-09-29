@@ -8,6 +8,14 @@
 #include "manager.h"
 #include "texture.h"
 
+//いったんファイルパス
+const char* g_apFilePath[CBlock::TYPE_MAX] =
+{
+	"data\\TEXTURE\\Block_R_01.png",
+	"data\\TEXTURE\\Block_R_02.png",
+	"data\\TEXTURE\\Block_R_03.png"
+};
+
 //=====================================
 //コンストラクタ
 //=====================================
@@ -18,6 +26,8 @@ CBlockManager::CBlockManager()
 		m_apBlock[cnt] = nullptr;
 	}
 	m_fSpeed = 0.0f;	//速度もいったん0
+	m_nNeedleHeight = -1;
+	m_nChangeNeedleHeight = 5;	//仮
 }
 
 //=====================================
@@ -75,10 +85,47 @@ void CBlockManager::Update(void)
 			m_apBlock[cnt]->SetSize(32.0f, 32.0f);
 			m_apBlock[cnt]->SetPosition(D3DXVECTOR3(SCREEN_WIDTH + 32.0f, BLOCK_START_HEIGHT + (cnt * 32.0f * 2.0f), 0.0f));
 
-			int nIdx = CManager::GetTexture()->Regist("data\\TEXTURE\\Block_R_01.png");
+			//ブロック種類設定
+			int nIdx;
+			
+			if (cnt > m_nNeedleHeight)
+			{//とげの高さより下（破壊可能ブロック）
+				m_apBlock[cnt]->SetType(CBlock::TYPE_BLOCK);
+				nIdx = CManager::GetTexture()->Regist(g_apFilePath[CBlock::TYPE_BLOCK]);
+			}
+			else if (cnt == m_nNeedleHeight)
+			{//とげの高さ（とげ）
+				m_apBlock[cnt]->SetType(CBlock::TYPE_NEEDLE);
+				nIdx = CManager::GetTexture()->Regist(g_apFilePath[CBlock::TYPE_NEEDLE]);
+			}
+			if (cnt < m_nNeedleHeight)
+			{//とげの高さより上（岩盤）
+				m_apBlock[cnt]->SetType(CBlock::TYPE_BEDROCK);
+				nIdx = CManager::GetTexture()->Regist(g_apFilePath[CBlock::TYPE_BEDROCK]);
+			}
 			m_apBlock[cnt]->SetIdxTexture(nIdx);
 			m_apBlock[cnt]->SetVtx();
 		}
+		m_nChangeNeedleHeight--;	//変更なし回数減らす
+	}
+
+	//高さ変更チェック
+	if (m_nChangeNeedleHeight <= 0)
+	{//変更する
+		m_nNeedleHeight += rand() % 3 - 1;	//高さ変更
+
+		//最低を下回らないようにする
+		if (m_nNeedleHeight < MIN_NEEDLE)
+		{
+			m_nNeedleHeight = MIN_NEEDLE;
+		}
+		//最高を上回らないようにする
+		else if (m_nNeedleHeight > MAX_NEEDLE)
+		{
+			m_nNeedleHeight = MAX_NEEDLE;
+		}
+
+		m_nChangeNeedleHeight = rand() % MIN_CHANGE_NUM + CHANGE_NUM_DEGREE;	//変更なし回数再設定
 	}
 }
 
