@@ -28,6 +28,7 @@
 #include "player.h"
 #include "block.h"
 #include "blockmanager.h"
+#include "multibg.h"
 
 //*****************************************************
 // マクロ定義
@@ -41,6 +42,7 @@ CScore *CGame::m_pScore = nullptr;	// スコアのポインタ
 CTimer *CGame::m_pTimer = nullptr;	// タイマーのポインタ
 CPlayer *CGame::m_pPlayer = nullptr;	// プレイヤーのポインタ
 CBlockManager *CGame::m_pBlockManager = nullptr;	//ブロックマネージャのポインタ
+CMultiBg *CGame::m_pMultiBg = nullptr;
 CGame::STATE CGame::m_state = STATE_NONE;
 
 //=====================================================
@@ -65,6 +67,11 @@ CGame::~CGame()
 HRESULT CGame::Init(void)
 {
 	CObjectManager *pObjManager = CManager::GetObjectManager();
+
+	if (m_pMultiBg == nullptr)
+	{// 多重背景生成
+		m_pMultiBg = CMultiBg::Create();
+	}
 
 	if (m_pScore == nullptr)
 	{// スコア生成
@@ -102,6 +109,13 @@ HRESULT CGame::Init(void)
 //=====================================================
 void CGame::Uninit(void)
 {
+	if (m_pMultiBg != nullptr)
+	{// 多重背景の終了・破棄
+		m_pMultiBg->Uninit();
+
+		m_pMultiBg = nullptr;
+	}
+
 	if (m_pScore != nullptr)
 	{// スコアの終了・破棄
 		m_pScore->Uninit();
