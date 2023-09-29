@@ -1,46 +1,21 @@
 ﻿  player.cpp
   コード生成しています。
-  3 of 390 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+  4 of 397 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
-animation2D.obj : warning LNK4099: PDB 'vc140.pdb' が 'animation2D.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-bg.obj : warning LNK4099: PDB 'vc140.pdb' が 'bg.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-billboard.obj : warning LNK4099: PDB 'vc140.pdb' が 'billboard.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 camera.obj : warning LNK4099: PDB 'vc140.pdb' が 'camera.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-collision.obj : warning LNK4099: PDB 'vc140.pdb' が 'collision.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 debugproc.obj : warning LNK4099: PDB 'vc140.pdb' が 'debugproc.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-effect2D.obj : warning LNK4099: PDB 'vc140.pdb' が 'effect2D.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-effect3D.obj : warning LNK4099: PDB 'vc140.pdb' が 'effect3D.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-fade.obj : warning LNK4099: PDB 'vc140.pdb' が 'fade.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-game.obj : warning LNK4099: PDB 'vc140.pdb' が 'game.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 input.obj : warning LNK4099: PDB 'vc140.pdb' が 'input.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 inputjoypad.obj : warning LNK4099: PDB 'vc140.pdb' が 'inputjoypad.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 inputkeyboard.obj : warning LNK4099: PDB 'vc140.pdb' が 'inputkeyboard.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 inputmouse.obj : warning LNK4099: PDB 'vc140.pdb' が 'inputmouse.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 light.obj : warning LNK4099: PDB 'vc140.pdb' が 'light.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-main.obj : warning LNK4099: PDB 'vc140.pdb' が 'main.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-manager.obj : warning LNK4099: PDB 'vc140.pdb' が 'manager.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 model.obj : warning LNK4099: PDB 'vc140.pdb' が 'model.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-motion.obj : warning LNK4099: PDB 'vc140.pdb' が 'motion.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-number.obj : warning LNK4099: PDB 'vc140.pdb' が 'number.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-object.obj : warning LNK4099: PDB 'vc140.pdb' が 'object.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-object2D.obj : warning LNK4099: PDB 'vc140.pdb' が 'object2D.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-object3D.obj : warning LNK4099: PDB 'vc140.pdb' が 'object3D.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 objectmanager.obj : warning LNK4099: PDB 'vc140.pdb' が 'objectmanager.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-objectX.obj : warning LNK4099: PDB 'vc140.pdb' が 'objectX.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-orbit.obj : warning LNK4099: PDB 'vc140.pdb' が 'orbit.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-particle.obj : warning LNK4099: PDB 'vc140.pdb' が 'particle.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 parts.obj : warning LNK4099: PDB 'vc140.pdb' が 'parts.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-ranking.obj : warning LNK4099: PDB 'vc140.pdb' が 'ranking.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-renderer.obj : warning LNK4099: PDB 'vc140.pdb' が 'renderer.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-scene.obj : warning LNK4099: PDB 'vc140.pdb' が 'scene.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-score.obj : warning LNK4099: PDB 'vc140.pdb' が 'score.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 sound.obj : warning LNK4099: PDB 'vc140.pdb' が 'sound.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 texture.obj : warning LNK4099: PDB 'vc140.pdb' が 'texture.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-timer.obj : warning LNK4099: PDB 'vc140.pdb' が 'timer.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-title.obj : warning LNK4099: PDB 'vc140.pdb' が 'title.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-tutorial.obj : warning LNK4099: PDB 'vc140.pdb' が 'tutorial.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 universal.obj : warning LNK4099: PDB 'vc140.pdb' が 'universal.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn\2023HGS_autumn.exe
   2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn\2023HGS_autumn.pdb (Full PDB)

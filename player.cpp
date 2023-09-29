@@ -15,6 +15,7 @@
 #include "texture.h"
 #include "inputkeyboard.h"
 #include "inputjoypad.h"
+#include "debugproc.h"
 
 //*****************************************************
 // マクロ定義
@@ -22,9 +23,11 @@
 #define BODY_PATH	"data\\TEXTURE\\CHARACTER\\player.png"	// 見た目のパス
 #define BODY_WIDTH	(50.0f)	// 体の幅
 #define BODY_HEIGHT	(100.0f)	// 体の高さ
-#define POWER_JUMP (10.0f)	// ジャンプ力
-#define FLOOR_LIMIT	(SCREEN_HEIGHT * 0.8f)	// 床の制限
+#define MAX_JUMP (30.0f)	// ジャンプ力
+#define FLOOR_LIMIT	(SCREEN_HEIGHT * 0.9f)	// 床の制限
 #define GRAVITY	(0.98f)	// 重力
+#define CHARGE_POWER	(0.01f)	// 1フレームあたりに溜まるジャンプ力
+#define MAX_CHARGE	(1.0f)	// チャージの最大値
 
 //=====================================================
 // 優先順位を決めるコンストラクタ
@@ -54,7 +57,7 @@ HRESULT CPlayer::Init(void)
 	{
 		m_player.pBody->SetSize(BODY_WIDTH, BODY_HEIGHT);
 		m_player.pBody->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
-
+		m_player.pos = D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f);  
 		int nIdx = CManager::GetTexture()->Regist(BODY_PATH);
 		m_player.pBody->SetIdxTexture(nIdx);
 		m_player.pBody->SetVtx();
@@ -112,9 +115,21 @@ void CPlayer::Input(void)
 		return;
 	}
 
+	if (pKeyboard->GetPress(DIK_SPACE))
+	{// ジャンプ溜め
+		m_player.fPowJump += CHARGE_POWER;
+
+		if (m_player.fPowJump >= MAX_CHARGE)
+		{// ジャンプ力制限
+			m_player.fPowJump = MAX_CHARGE;
+		}
+	}
+
 	if (pKeyboard->GetRelease(DIK_SPACE))
 	{// ジャンプ操作
-		m_player.move.y -= POWER_JUMP;
+		m_player.move.y -= MAX_JUMP * m_player.fPowJump;
+
+		m_player.fPowJump = 0.0f;
 	}
 }
 
@@ -166,7 +181,25 @@ void CPlayer::LimitPos(void)
 //=====================================================
 void CPlayer::Draw(void)
 {
+#ifdef _DEBUG
+	// デバッグ表示
+	Debug();
+#endif
+}
 
+//=====================================================
+// デバッグ表示
+//=====================================================
+void CPlayer::Debug(void)
+{
+	CDebugProc *pDebugProc = CManager::GetDebugProc();
+
+	if (pDebugProc == nullptr)
+	{
+		return;
+	}
+
+	pDebugProc->Print("\nジャンプ力[%f]",m_player.fPowJump);
 }
 
 //=====================================================
