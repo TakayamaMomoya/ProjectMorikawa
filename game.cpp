@@ -70,6 +70,8 @@ CGame::~CGame()
 //=====================================================
 HRESULT CGame::Init(void)
 {
+	CSound *pSound = CManager::GetSound();
+
 	m_fGameSpeed = 1.0f;
 
 	CObjectManager *pObjManager = CManager::GetObjectManager();
@@ -106,6 +108,8 @@ HRESULT CGame::Init(void)
 		// プレイヤー生成
 		m_pPlayer = CPlayer::Create();
 	}
+
+	pSound->Play(CSound::LABELTRAM_SE);
 
 	return S_OK;
 }
@@ -232,7 +236,7 @@ void CGame::Update(void)
 			{//リザルト表示
 				//リザルト文字
 				m_pResult = CObject2D::Create(CObject::PRIORITY_UI);
-				m_pResult->SetSize(444.0f, 78.0f);
+				m_pResult->SetSize(480.0f, 78.0f);
 				m_pResult->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, 300.0f, 0.0f));
 				m_pResult->SetIdxTexture(CManager::GetTexture()->Regist("data\\TEXTURE\\UI\\yourscore.png"));
 				m_pResult->SetVtx();

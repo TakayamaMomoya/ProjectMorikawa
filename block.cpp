@@ -11,6 +11,8 @@
 #include "debrisspawner.h"
 #include "score.h"
 #include "bonus.h"
+#include "sound.h"
+#include "manager.h"
 
 //*****************************************************
 // マクロ定義
@@ -117,6 +119,8 @@ void CBlock::ManageCollision(void)
 //=====================================
 void CBlock::ManageHit(CObject *pObj)
 {
+	CSound *pSound = CManager::GetSound();
+
 	// スコア取得
 	CScore *pScore = CGame::GetScore();
 
@@ -133,6 +137,8 @@ void CBlock::ManageHit(CObject *pObj)
 
 		CBonus::Create(GetPosition(), GetMove(), NORMAL_SCORE);
 
+		pSound->Play(CSound::LABELBREAK_SE);
+
 		Uninit();
 
 		break;
@@ -146,6 +152,8 @@ void CBlock::ManageHit(CObject *pObj)
 		}
 
 		CBonus::Create(GetPosition(), GetMove(), BONUS_SCORE);
+
+		pSound->Play(CSound::LABELBONUS_SE);
 
 		Uninit();
 

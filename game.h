@@ -56,6 +56,7 @@ public:
 	static void SetState(STATE state) { m_state = state; }
 	static STATE GetState(void) { return m_state; }
 	static float GetGameSpeed(void) { return m_fGameSpeed; }
+	static void SetSpeed(float fSpeed) { m_fGameSpeed = fSpeed; }
 
 private:
 	void ManageSpeed(void);

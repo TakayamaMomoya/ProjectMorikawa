@@ -19,6 +19,7 @@
 #include "manager.h"
 #include "texture.h"
 #include "multibg.h"
+#include "game.h"
 
 //*****************************************************
 // マクロ定義
@@ -63,6 +64,9 @@ CRanking::~CRanking()
 //=====================================================
 HRESULT CRanking::Init(void)
 {
+	//背景のスクロールスピード設定
+	CGame::SetSpeed(1.0f);
+
 	// 多重背景の生成
 	CMultiBg *pMultiBg = CMultiBg::Create();
 
