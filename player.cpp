@@ -41,9 +41,9 @@
 #define CHARGE_POWER	(0.010f)	// 1フレームあたりに溜まるジャンプ力
 #define CHARGE_INTIIAL	(0.5f)	// 初動のジャンプ力
 #define MAX_CHARGE	(0.5f)	// チャージの最大値
-#define JUMP_BUTTON	(DIK_SPACE)	// ジャンプキー
+#define JUMP_BUTTON	(DIK_RETURN)	// ジャンプキー
 #define ROLL_SPEED	(0.6f)	// 回転速度
-#define DAMAGE_SCORE	(-5000)	// 減点
+#define DAMAGE_SCORE	(-5000)	// 減点量
 
 //=====================================================
 // 優先順位を決めるコンストラクタ
