@@ -17,10 +17,10 @@ const int CBlockManager::m_aUpDown[BLOCK_CREATE_NUM - MAX_NEEDLE + 2][2] =
 //いったんファイルパス
 const char* g_apFilePath[CBlock::TYPE_MAX] =
 {
-	"data\\TEXTURE\\Block_R_01.png",
-	"data\\TEXTURE\\Block_R_04.png",
-	"data\\TEXTURE\\Block_R_02.png",
-	"data\\TEXTURE\\Block_R_03.png"
+	"data\\TEXTURE\\BLOCK\\block_00.png",
+	"data\\TEXTURE\\BLOCK\\bonusblock.png",
+	"data\\TEXTURE\\BLOCK\\damageblock.png",
+	"data\\TEXTURE\\BLOCK\\bedrock.png"
 };
 
 //=====================================

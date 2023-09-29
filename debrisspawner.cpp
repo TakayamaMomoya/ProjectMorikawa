@@ -10,6 +10,8 @@
 //*****************************************************
 #include "debrisspawner.h"
 #include "debris.h"
+#include "manager.h"
+#include "texture.h"
 
 //=====================================================
 // 優先順位を決めるコンストラクタ
@@ -20,6 +22,7 @@ CDebrisSpawner::CDebrisSpawner()
 	m_fSpeed = 0.0f;
 	m_nLife = 0;
 	m_nNumDebris = 0;
+	m_type = TYPE_NORMAL;
 }
 
 //=====================================================
@@ -56,6 +59,12 @@ void CDebrisSpawner::Update(void)
 	int nLife;
 	CDebris *pDebris;
 
+	char *aPath[TYPE_MAX] = 
+	{
+		"data\\TEXTURE\\BLOCK\\fragment00.png",
+		"data\\TEXTURE\\BLOCK\\fragment01.png",
+	};
+
 	for (int nCnt = 0; nCnt < m_nNumDebris; nCnt++)
 	{
 		nLife = rand() % 50 + 10;
@@ -69,6 +78,10 @@ void CDebrisSpawner::Update(void)
 		pDebris = CDebris::Create(m_pos, nLife);
 
 		pDebris->SetMove(move);
+
+		int nIdx = CManager::GetTexture()->Regist(aPath[m_type]);
+		pDebris->SetIdxTexture(nIdx);
+		pDebris->SetVtx();
 	}
 
 	m_nLife--;
@@ -91,7 +104,7 @@ void CDebrisSpawner::SetPosition(D3DXVECTOR3 pos)
 //=====================================================
 // 生成処理
 //=====================================================
-CDebrisSpawner *CDebrisSpawner::Create(D3DXVECTOR3 pos,float fSpeed,int nLife, int nNumDebris)
+CDebrisSpawner *CDebrisSpawner::Create(D3DXVECTOR3 pos,float fSpeed,int nLife, int nNumDebris, TYPE type)
 {
 	CDebrisSpawner *pSpawner = nullptr;
 
@@ -106,6 +119,8 @@ CDebrisSpawner *CDebrisSpawner::Create(D3DXVECTOR3 pos,float fSpeed,int nLife, i
 		pSpawner->m_fSpeed = fSpeed;
 
 		pSpawner->m_nNumDebris = nNumDebris;
+
+		pSpawner->m_type = type;
 	}
 
 	return pSpawner;

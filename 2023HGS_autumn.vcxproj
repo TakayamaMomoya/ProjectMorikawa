@@ -163,6 +163,7 @@
     <ClCompile Include="billboard.cpp" />
     <ClCompile Include="block.cpp" />
     <ClCompile Include="blockmanager.cpp" />
+    <ClCompile Include="bonus.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="debris.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="billboard.h" />
     <ClInclude Include="block.h" />
     <ClInclude Include="blockmanager.h" />
+    <ClInclude Include="bonus.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="debris.h" />

@@ -10,12 +10,14 @@
 #include "collision.h"
 #include "debrisspawner.h"
 #include "score.h"
+#include "bonus.h"
 
 //*****************************************************
 // マクロ定義
 //*****************************************************
 #define SIZE_DEFAULT	(32.0f)	// デフォルトのサイズ
-#define NORMAL_SCORE	(720)	// 通常スコア
+#define NORMAL_SCORE	(500)	// 通常スコア
+#define BONUS_SCORE	(5000)	// ボーナススコア
 
 //=====================================
 //コンストラクタ
@@ -96,9 +98,6 @@ void CBlock::Update(void)
 //=====================================
 void CBlock::ManageCollision(void)
 {
-	// スコア取得
-	CScore *pScore = CGame::GetScore();
-
 	if (m_pCollisionSphere != nullptr)
 	{// 球の当たり判定の管理
 		m_pCollisionSphere->SetPositionOld(m_pCollisionSphere->GetPosition());
@@ -107,16 +106,63 @@ void CBlock::ManageCollision(void)
 
 		if (m_pCollisionSphere->IsTriggerEnter(CCollision::TAG_PLAYER))
 		{// 対象との当たり判定
-			CDebrisSpawner::Create(GetPosition(), 10.0f, 2, 3);
+			ManageHit(m_pCollisionSphere->GetOther());
 
-			if (pScore != nullptr)
-			{
-				pScore->AddScore(NORMAL_SCORE);
-			}
-
-			Uninit();
 		}
 	}
+}
+
+//=====================================
+// 当たった時の管理
+//=====================================
+void CBlock::ManageHit(CObject *pObj)
+{
+	// スコア取得
+	CScore *pScore = CGame::GetScore();
+
+	switch (m_type)
+	{
+	case CBlock::TYPE_BLOCK:
+
+		CDebrisSpawner::Create(GetPosition(), 10.0f, 2, 3);
+
+		if (pScore != nullptr)
+		{
+			pScore->AddScore(NORMAL_SCORE);
+		}
+
+		CBonus::Create(GetPosition(), GetMove(), NORMAL_SCORE);
+
+		Uninit();
+
+		break;
+	case CBlock::TYPE_BONUS:
+
+		CDebrisSpawner::Create(GetPosition(), 20.0f, 2, 30,CDebrisSpawner::TYPE_BONUS);
+
+		if (pScore != nullptr)
+		{
+			pScore->AddScore(BONUS_SCORE);
+		}
+
+		CBonus::Create(GetPosition(), GetMove(), BONUS_SCORE);
+
+		Uninit();
+
+		break;
+	case CBlock::TYPE_NEEDLE:
+
+		if (pObj != nullptr)
+		{
+			pObj->Hit(0.0f);
+		}
+
+		break;
+	case CBlock::TYPE_BEDROCK:
+	default:
+		break;
+	}
+
 }
 
 //=====================================

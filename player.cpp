@@ -52,7 +52,7 @@ CPlayer::CPlayer(int nPriority)
 //=====================================================
 CPlayer::~CPlayer()
 {
-
+	
 }
 
 //=====================================================
@@ -66,8 +66,8 @@ HRESULT CPlayer::Init(void)
 	if (m_player.pBody != nullptr)
 	{
 		m_player.pBody->SetSize(BODY_WIDTH, BODY_HEIGHT);
-		m_player.pBody->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
-		m_player.pos = D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f);  
+		m_player.pBody->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.5f, 0.0f));
+		m_player.pos = D3DXVECTOR3(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.5f, 0.0f);  
 		int nIdx = CManager::GetTexture()->Regist(BODY_PATH);
 		m_player.pBody->SetIdxTexture(nIdx);
 		m_player.pBody->SetVtx();
@@ -339,6 +339,14 @@ void CPlayer::FollowTram(void)
 	pTram->SetPosition(D3DXVECTOR3(m_player.pos.x, TRAM_POSY, 0.0f));
 
 	pTram->SetVtx();
+}
+
+//=====================================================
+// ÉqÉbÉgèàóù
+//=====================================================
+void CPlayer::Hit(float fDamage)
+{
+	m_player.move.y += GRAVITY;
 }
 
 //=====================================================
