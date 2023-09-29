@@ -10,6 +10,7 @@
 //*****************************************************
 #include "manager.h"
 #include "renderer.h"
+#include "texture.h"
 #include "game.h"
 #include "score.h"
 #include "timer.h"
@@ -25,6 +26,8 @@
 #include "sound.h"
 #include "scene.h"
 #include "player.h"
+#include "block.h"
+#include "blockmanager.h"
 
 //*****************************************************
 // マクロ定義
@@ -35,6 +38,7 @@
 //*****************************************************
 CScore *CGame::m_pScore = nullptr;	// スコアのポインタ
 CTimer *CGame::m_pTimer = nullptr;	// タイマーのポインタ
+CBlockManager *CGame::m_pBlockManager = nullptr;	//ブロックマネージャのポインタ
 CGame::STATE CGame::m_state = STATE_NONE;
 
 //=====================================================
@@ -75,8 +79,23 @@ HRESULT CGame::Init(void)
 		m_pTimer = CTimer::Create();
 	}
 
+	if (m_pBlockManager == nullptr)
+	{//ブロックマネージャ生成
+		m_pBlockManager = CBlockManager::Create();
+		m_pBlockManager->SetSpeed(1.0f);
+	}
+
 	// プレイヤー生成
 	CPlayer::Create();
+
+	//ブロック仮置き
+	CBlock* pBlock = CBlock::Create();
+	pBlock->SetSize(32.0f, 32.0f);
+	pBlock->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
+
+	int nIdx = CManager::GetTexture()->Regist("data\\TEXTURE\\Block_R_01.png");
+	pBlock->SetIdxTexture(nIdx);
+	pBlock->SetVtx();
 
 	return S_OK;
 }
