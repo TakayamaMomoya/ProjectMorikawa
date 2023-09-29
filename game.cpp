@@ -24,17 +24,11 @@
 #include "objectmanager.h"
 #include "sound.h"
 #include "scene.h"
+#include "player.h"
 
 //*****************************************************
 // マクロ定義
 //*****************************************************
-#define TRANS_TIME	(60)	// 終了までの余韻のフレーム数
-#define LIMIT_LENGTH	(10000)	// 移動制限の距離
-#define LIMIT_WIDTH	(100)	// 推定プレイヤーの幅
-#define LIMIT_HEIGHT	(2000)	// 制限高度
-#define BONUS_TIME	(40)	// ボーナスが付与される最低限のタイム
-#define RATE_BONUS	(0.015f)	// 1秒当たりのタイムボーナス
-#define RESULT_TIME	(5)	// リザルト画面表示までのラグ
 
 //*****************************************************
 // 静的メンバ変数宣言
@@ -80,6 +74,9 @@ HRESULT CGame::Init(void)
 	{// タイマー生成
 		m_pTimer = CTimer::Create();
 	}
+
+	// プレイヤー生成
+	CPlayer::Create();
 
 	return S_OK;
 }
