@@ -9,6 +9,7 @@
 // インクルード
 //*****************************************************
 #include "main.h"
+#include "game.h"
 #include "player.h"
 #include "object2D.h"
 #include "manager.h"
@@ -19,6 +20,7 @@
 #include "universal.h"
 #include "collision.h"
 #include "arrow.h"
+#include "timer.h"
 
 //*****************************************************
 // マクロ定義
@@ -141,8 +143,15 @@ void CPlayer::Update(void)
 	// 前回の位置を保存
 	m_player.posOld = m_player.pos;
 
-	// 操作処理
-	Input();
+	if (CGame::GetTimer()->GetSecond() > 0)
+	{//時間がある限り動かせるようにする
+		// 操作処理
+		Input();
+	}
+	else if(m_player.bJump == false)
+	{
+		m_player.move = D3DXVECTOR3(5.0f, 0.0f, 0.0f);
+	}
 
 	// 移動の管理
 	ManageMove();
