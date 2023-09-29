@@ -20,6 +20,7 @@ CDebrisSpawner::CDebrisSpawner()
 	m_fSpeed = 0.0f;
 	m_nLife = 0;
 	m_nNumDebris = 0;
+	m_type = TYPE_NORMAL;
 }
 
 //=====================================================
@@ -91,7 +92,7 @@ void CDebrisSpawner::SetPosition(D3DXVECTOR3 pos)
 //=====================================================
 // ¶¬ˆ—
 //=====================================================
-CDebrisSpawner *CDebrisSpawner::Create(D3DXVECTOR3 pos,float fSpeed,int nLife, int nNumDebris)
+CDebrisSpawner *CDebrisSpawner::Create(D3DXVECTOR3 pos,float fSpeed,int nLife, int nNumDebris, TYPE type)
 {
 	CDebrisSpawner *pSpawner = nullptr;
 
@@ -106,6 +107,8 @@ CDebrisSpawner *CDebrisSpawner::Create(D3DXVECTOR3 pos,float fSpeed,int nLife, i
 		pSpawner->m_fSpeed = fSpeed;
 
 		pSpawner->m_nNumDebris = nNumDebris;
+
+		pSpawner->m_type = type;
 	}
 
 	return pSpawner;
