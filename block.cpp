@@ -10,6 +10,7 @@
 #include "collision.h"
 #include "debrisspawner.h"
 #include "score.h"
+#include "bonus.h"
 
 //*****************************************************
 // ƒ}ƒNƒ’è‹`
@@ -130,6 +131,8 @@ void CBlock::ManageHit(CObject *pObj)
 			pScore->AddScore(NORMAL_SCORE);
 		}
 
+		CBonus::Create(GetPosition(), GetMove(), NORMAL_SCORE);
+
 		Uninit();
 
 		break;
@@ -141,6 +144,8 @@ void CBlock::ManageHit(CObject *pObj)
 		{
 			pScore->AddScore(BONUS_SCORE);
 		}
+
+		CBonus::Create(GetPosition(), GetMove(), BONUS_SCORE);
 
 		Uninit();
 
