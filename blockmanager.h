@@ -17,6 +17,8 @@
 #define MAX_NEEDLE			(3)		//とげ最高高さ
 #define MIN_CHANGE_NUM		(2)		//最低限変えない配置回数
 #define CHANGE_NUM_DEGREE	(2)		//配置回数の振れ幅
+#define BONUS_SPAWN_MIN		(4)		//ボーナスブロックの最低出現頻度
+#define BONUS_SPAWN_DEGREE	(3)		//ボーナスブロックの振れ幅
 
 //ブロッククラス
 class CBlockManager : public CObject
@@ -44,5 +46,6 @@ private:
 	float m_fSpeed;							//ブロックスクロール速度
 	int m_nNeedleHeight;					//とげを置く高さ
 	int m_nChangeNeedleHeight;				//とげの高さを変える配置回数
+	int m_nSpawnBonus;						//ボーナスブロックが次出てくるまで
 };
 #endif // !_BLOCK_MANAGER_H_
