@@ -19,7 +19,9 @@
 //*****************************************************
 #define BG_FRONT	"data\\TEXTURE\\BG\\bg000.png"	        // àÍî‘ëOÇÃîwåi
 #define BG_MIDDLE	"data\\TEXTURE\\BG\\bg001.png"	        // ê^ÇÒíÜÇÃîwåi
-#define BG_BACK	    "data\\TEXTURE\\BG\\bg002.jpg"	        // àÍî‘å„ÇÎÇÃîwåi
+#define BG_BACK	    "data\\TEXTURE\\BG\\bg002.png"	        // àÍî‘å„ÇÎÇÃîwåi
+#define BG_MIDSPEED  (0.002f)                               // ê^ÇÒíÜÇÃîwåiÇÃë¨ìx
+#define BG_FROSPEED  (0.003f)                               // àÍî‘ëOÇÃîwåiÇÃë¨ìx
 
 //*****************************************************
 // ê√ìIÉÅÉìÉoïœêîêÈåæ
@@ -31,10 +33,15 @@ LPDIRECT3DTEXTURE9 CMultiBg::m_pTexture = nullptr;	// ÉeÉNÉXÉ`ÉÉÇÃÉ|ÉCÉìÉ^
 //=====================================================
 CMultiBg::CMultiBg(int nPriority) : CObject2D(nPriority)
 {
+	ZeroMemory(&m_Multibg, sizeof(MultiBg));
 	m_fSpeedU = 0.0f;
 	m_fSpeedV = 0.0f;
-	m_texLeftUp = { 0.0f,0.0f };
-	m_texRightDown = { 0.0f,0.0f };
+	m_texFrontLeftUp = { 0.0f,0.0f };
+	m_texFrontRightDown = { 0.0f,0.0f };
+	m_texMiddleLeftUp = { 0.0f,0.0f };
+	m_texMiddleRightDown = { 0.0f,0.0f };
+	m_texBackLeftUp = { 0.0f,0.0f };
+	m_texBackRightDown = { 0.0f,0.0f };
 }
 
 //=====================================================
@@ -53,42 +60,50 @@ HRESULT CMultiBg::Init(void)
 	// ÉfÉoÉCÉXÇÃéÊìæ
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	for(int nCount = 0; nCount < 3; nCount++)
+	m_Multibg.pBack = CObject2D::Create(PRIORITY_BG);
+
+	// àÍî‘å„ÇÎÇÃîwåi
+	if (m_Multibg.pBack != nullptr)
 	{
-		if (m_apObject2D[nCount] == NULL)
-		{//égópÇµÇƒÇ¢Ç»Ç©Ç¡ÇΩÇÁ
-
-			//ê∂ê¨
-			m_apObject2D[nCount] = CObject2D::Create(1, SCREEN_HEIGHT * 0.5f);
-
-			if (nCount == 0)
-			{
-				int nIdx = CManager::GetTexture()->Regist(BG_BACK);
-				m_apObject2D[0]->SetIdxTexture(nIdx);
-			}
-
-			if (nCount == 1)
-			{
-				int nIdx = CManager::GetTexture()->Regist(BG_MIDDLE);
-				m_apObject2D[1]->SetIdxTexture(nIdx);
-			}
-
-			if (nCount == 2)
-			{
-				int nIdx = CManager::GetTexture()->Regist(BG_FRONT);
-				m_apObject2D[2]->SetIdxTexture(nIdx);
-			}
-
-			//èâä˙âªèàóù
-			m_apObject2D[nCount]->Init();
-		}
+		m_Multibg.pBack->Init();
+		m_Multibg.pBack->SetSize(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
+		m_Multibg.pBack->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
+		int nIdx = CManager::GetTexture()->Regist(BG_BACK);
+		m_Multibg.pBack->SetIdxTexture(nIdx);
+		m_Multibg.pBack->SetVtx();
 	}
 
-	// åpè≥ÉNÉâÉXÇÃèâä˙âª
-	//CObject2D::Init();
+	m_Multibg.pMiddle = CObject2D::Create(PRIORITY_BG);
 
-	m_texLeftUp = { 0.0f,0.0f };
-	m_texRightDown = { 1.0f,1.0f };
+	// ê^ÇÒíÜÇÃîwåi
+	if (m_Multibg.pBack != nullptr)
+	{
+		m_Multibg.pMiddle->Init();
+		m_Multibg.pMiddle->SetSize(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
+		m_Multibg.pMiddle->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
+		int nIdx = CManager::GetTexture()->Regist(BG_MIDDLE);
+		m_Multibg.pMiddle->SetIdxTexture(nIdx);
+		m_Multibg.pMiddle->SetVtx();
+	}
+
+	m_Multibg.pFront = CObject2D::Create(PRIORITY_BG);
+
+	// àÍî‘ëOÇÃîwåi
+	if (m_Multibg.pFront != nullptr)
+	{
+		m_Multibg.pFront->Init();
+		m_Multibg.pFront->SetSize(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
+		m_Multibg.pFront->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
+		int nIdx = CManager::GetTexture()->Regist(BG_FRONT);
+		m_Multibg.pFront->SetIdxTexture(nIdx);
+		m_Multibg.pFront->SetVtx();
+	}
+
+	//m_texLeftUp = { 0.0f,0.0f };
+	//m_texRightDown = { 1.0f,1.0f };
+	m_texBackRightDown = { 1.0f,1.0f };
+	m_texMiddleRightDown = { 1.0f,1.0f };
+	m_texFrontRightDown = { 1.0f,1.0f };
 
 	return S_OK;
 }
@@ -98,18 +113,26 @@ HRESULT CMultiBg::Init(void)
 //=====================================================
 void CMultiBg::Uninit(void)
 {
-	// åpè≥ÉNÉâÉXÇÃèIóπ
-	//CObject2D::Uninit();
-
-	for (int nCount = 0; nCount < 3; nCount++)
-	{
-		if (m_apObject2D[nCount] != NULL)
-		{
-			m_apObject2D[nCount]->Uninit();
-
-			m_apObject2D[nCount] = NULL;
-		}
+	if (m_Multibg.pBack != nullptr)
+	{// É{ÉfÉBÇÃîjä¸
+		m_Multibg.pBack->Uninit();
+		m_Multibg.pBack = nullptr;
 	}
+
+	if (m_Multibg.pMiddle != nullptr)
+	{// ÉgÉçÉbÉRÇÃîjä¸
+		m_Multibg.pMiddle->Uninit();
+		m_Multibg.pMiddle = nullptr;
+	}
+
+	if (m_Multibg.pFront != nullptr)
+	{// ÉgÉçÉbÉRÇÃîjä¸
+		m_Multibg.pFront->Uninit();
+		m_Multibg.pFront = nullptr;
+	}
+
+	// åpè≥ÉNÉâÉXÇÃèIóπ
+	CObject2D::Uninit();
 }
 
 //=====================================================
@@ -117,43 +140,85 @@ void CMultiBg::Uninit(void)
 //=====================================================
 void CMultiBg::Update(void)
 {
-	m_texLeftUp.x += m_fSpeedU;
-	m_texLeftUp.y += m_fSpeedV;
-	m_texRightDown.x += m_fSpeedU;
-	m_texRightDown.y += m_fSpeedV;
+	m_fSpeedU = 0.001f;
 
-	if (m_texLeftUp.x > 1.0f)
+	// àÍî‘å„ÇÎÇÃîwåi
+	m_texBackLeftUp.x += m_fSpeedU;
+	m_texBackLeftUp.y += m_fSpeedV;
+	m_texBackRightDown.x += m_fSpeedU;
+	m_texBackRightDown.y += m_fSpeedV;
+
+	// ê^ÇÒíÜÇÃîwåi
+	m_texMiddleLeftUp.x += (m_fSpeedU + BG_MIDSPEED);
+	m_texMiddleLeftUp.y += m_fSpeedV;
+	m_texMiddleRightDown.x += (m_fSpeedU + BG_MIDSPEED);
+	m_texMiddleRightDown.y += m_fSpeedV;
+
+	// àÍî‘ëOÇÃîwåi
+	m_texFrontLeftUp.x += (m_fSpeedU + BG_FROSPEED);
+	m_texFrontLeftUp.y += m_fSpeedV;
+	m_texFrontRightDown.x += (m_fSpeedU + BG_FROSPEED);
+	m_texFrontRightDown.y += m_fSpeedV;
+
+	if (m_texBackLeftUp.x > 1.0f)
 	{
-		m_texLeftUp.x -= 1.0f;
-		m_texRightDown.x -= 1.0f;
+		m_texBackLeftUp.x -= 1.0f;
+		m_texBackRightDown.x -= 1.0f;
 	}
 
-	if (m_texLeftUp.y > 1.0f)
+	if (m_texBackLeftUp.y > 1.0f)
 	{
-		m_texLeftUp.y -= 1.0f;
-		m_texRightDown.y -= 1.0f;
+		m_texBackLeftUp.y -= 1.0f;
+		m_texBackRightDown.y -= 1.0f;
 	}
 
-	// åpè≥ÉNÉâÉXÇÃçXêV
-	//CObject2D::Update();
-
-	for (int nCount = 0; nCount < 3; nCount++)
+	if (m_texMiddleLeftUp.x > 1.0f)
 	{
-		if (m_apObject2D[nCount] != NULL)
-		{
-			m_apObject2D[nCount]->Update();
-
-			m_apObject2D[nCount]->SetVtx();
-
-			m_apObject2D[nCount]->SetTex(m_texLeftUp, m_texRightDown);
-		}
+		m_texMiddleLeftUp.x -= 1.0f;
+		m_texMiddleRightDown.x -= 1.0f;
 	}
 
-	// í∏ì_èÓïÒê›íË
-	//SetVtx();
+	if (m_texMiddleLeftUp.y > 1.0f)
+	{
+		m_texMiddleLeftUp.y -= 1.0f;
+		m_texMiddleRightDown.y -= 1.0f;
+	}
 
-	// ÉeÉNÉXÉ`ÉÉç¿ïWçXêV
-	//SetTex(m_texLeftUp, m_texRightDown);
+	if (m_texFrontLeftUp.x > 1.0f)
+	{
+		m_texFrontLeftUp.x -= 1.0f;
+		m_texFrontRightDown.x -= 1.0f;
+	}
+
+	if (m_texFrontLeftUp.y > 1.0f)
+	{
+		m_texFrontLeftUp.y -= 1.0f;
+		m_texFrontRightDown.y -= 1.0f;
+	}
+
+	// àÍî‘å„ÇÎÇÃîwåi
+	if (m_Multibg.pBack != nullptr)
+	{
+		m_Multibg.pBack->Update();
+		m_Multibg.pBack->SetVtx();
+		m_Multibg.pBack->SetTex(m_texBackLeftUp, m_texBackRightDown);
+	}
+
+	// ê^ÇÒíÜÇÃîwåi
+	if (m_Multibg.pMiddle != nullptr)
+	{
+		m_Multibg.pMiddle->Update();
+		m_Multibg.pMiddle->SetVtx();
+		m_Multibg.pMiddle->SetTex(m_texMiddleLeftUp, m_texMiddleRightDown);
+	}
+
+	// àÍî‘ëOÇÃîwåi
+	if (m_Multibg.pFront != nullptr)
+	{
+		m_Multibg.pFront->Update();
+		m_Multibg.pFront->SetVtx();
+		m_Multibg.pFront->SetTex(m_texFrontLeftUp, m_texFrontRightDown);
+	}
 }
 
 //=====================================================
@@ -163,14 +228,6 @@ void CMultiBg::Draw(void)
 {
 	// åpè≥ÉNÉâÉXÇÃï`âÊ
 	//CObject2D::Draw();
-
-	for (int nCount = 0; nCount < 3; nCount++)
-	{
-		if (m_apObject2D[nCount] != NULL)
-		{
-			m_apObject2D[nCount]->Draw();
-		}
-	}
 }
 
 //=====================================================
@@ -228,8 +285,8 @@ CMultiBg *CMultiBg::Create(void)
 
 		// èâä˙âªèàóù
 		pBg->Init();
-		pBg->SetSize(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-		pBg->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
+		//pBg->SetSize(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
+		//pBg->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f));
 	}
 
 	return pBg;
