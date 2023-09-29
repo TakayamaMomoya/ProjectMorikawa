@@ -29,6 +29,7 @@ CBlockManager::CBlockManager()
 	m_fSpeed = 0.0f;	//速度もいったん0
 	m_nNeedleHeight = 0;
 	m_nChangeNeedleHeight = 0;
+	m_nSpawnBonus = 0;
 }
 
 //=====================================
@@ -44,6 +45,7 @@ CBlockManager::~CBlockManager()
 HRESULT CBlockManager::Init(void)
 {
 	m_nChangeNeedleHeight = 5;	//仮
+	m_nSpawnBonus = 7;
 
 	return S_OK;
 }
@@ -82,6 +84,14 @@ void CBlockManager::Update(void)
 	//ブロックがすべて表示された
 	if (bNotDisp == false)
 	{//生成
+		//ボーナス出現タイミングの時はボーナスの場所を設定
+		int nBonus = -1;
+		if (m_nSpawnBonus <= 0)
+		{
+			nBonus = (m_nNeedleHeight + 1) + rand() % (BLOCK_CREATE_NUM - m_nNeedleHeight - 1);
+			m_nSpawnBonus = rand() % BONUS_SPAWN_DEGREE + BONUS_SPAWN_MIN + 1;	//ボーナス出現タイミング再設定
+		}
+
 		for (int cnt = 0; cnt < BLOCK_CREATE_NUM; cnt++)
 		{//最大数分生成
 			m_apBlock[cnt] = CBlock::Create();
@@ -93,8 +103,16 @@ void CBlockManager::Update(void)
 			
 			if (cnt > m_nNeedleHeight)
 			{//とげの高さより下（破壊可能ブロック）
-				m_apBlock[cnt]->SetType(CBlock::TYPE_BLOCK);
-				nIdx = CManager::GetTexture()->Regist(g_apFilePath[CBlock::TYPE_BLOCK]);
+				if (nBonus == cnt)
+				{//ボーナス
+					m_apBlock[cnt]->SetType(CBlock::TYPE_BONUS);
+					nIdx = CManager::GetTexture()->Regist(g_apFilePath[CBlock::TYPE_BONUS]);
+				}
+				else
+				{//通常
+					m_apBlock[cnt]->SetType(CBlock::TYPE_BLOCK);
+					nIdx = CManager::GetTexture()->Regist(g_apFilePath[CBlock::TYPE_BLOCK]);
+				}
 			}
 			else if (cnt == m_nNeedleHeight)
 			{//とげの高さ（とげ）
@@ -110,6 +128,7 @@ void CBlockManager::Update(void)
 			m_apBlock[cnt]->SetVtx();
 		}
 		m_nChangeNeedleHeight--;	//変更なし回数減らす
+		m_nSpawnBonus--;			//ボーナスカウント減らす
 	}
 
 	//高さ変更チェック
