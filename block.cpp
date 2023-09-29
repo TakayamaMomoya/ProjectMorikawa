@@ -7,12 +7,19 @@
 #include "game.h"
 #include "block.h"
 #include "blockmanager.h"
+#include "collision.h"
+
+//*****************************************************
+// マクロ定義
+//*****************************************************
+#define SIZE_DEFAULT	(32.0f)	// デフォルトのサイズ
 
 //=====================================
 //コンストラクタ
 //=====================================
 CBlock::CBlock()
 {
+	m_pCollisionSphere = nullptr;
 }
 
 //=====================================
@@ -27,6 +34,21 @@ CBlock::~CBlock()
 //=====================================
 HRESULT CBlock::Init(void)
 {
+	if (m_pCollisionSphere == nullptr)
+	{// 球の当たり判定生成
+		m_pCollisionSphere = CCollisionSphere::Create(CCollision::TAG_BLOCK, CCollision::TYPE_SPHERE, this);
+
+		float fRadius;
+
+		if (m_pCollisionSphere != nullptr)
+		{// 情報の設定
+			fRadius = SIZE_DEFAULT;
+
+			m_pCollisionSphere->SetPosition(GetPosition());
+			m_pCollisionSphere->SetRadius(fRadius);
+		}
+	}
+
 	return CObject2D::Init();	//親処理
 }
 
@@ -35,11 +57,18 @@ HRESULT CBlock::Init(void)
 //=====================================
 void CBlock::Uninit(void)
 {
+	if (m_pCollisionSphere != nullptr)
+	{// 当たり判定の消去
+		m_pCollisionSphere->Uninit();
+
+		m_pCollisionSphere = nullptr;
+	}
+
 	CObject2D::Uninit();		//親処理
 }
 
 //=====================================
-//更新
+// 更新
 //=====================================
 void CBlock::Update(void)
 {
@@ -54,6 +83,18 @@ void CBlock::Update(void)
 
 	CObject2D::Update();									//親処理
 	CObject2D::SetVtx();									//頂点移動
+
+	if (m_pCollisionSphere != nullptr)
+	{// 球の当たり判定の管理
+		m_pCollisionSphere->SetPositionOld(m_pCollisionSphere->GetPosition());
+
+		m_pCollisionSphere->SetPosition(GetPosition());
+
+		if (m_pCollisionSphere->IsTriggerEnter(CCollision::TAG_PLAYER))
+		{// 対象との当たり判定
+			Uninit();
+		}
+	}
 }
 
 //=====================================

@@ -8,6 +8,11 @@
 #define _BLOCK_H_
 #include "object2D.h"
 
+//*****************************************************
+// 前方宣言
+//*****************************************************
+class CCollisionSphere;
+
 //ブロッククラス
 class CBlock : public CObject2D
 {
@@ -42,5 +47,6 @@ private:
 	bool CheckOutOfRange(void);	//範囲外チェック
 	
 	TYPE m_type;			//ブロック種類
+	CCollisionSphere *m_pCollisionSphere;	// 球の当たり判定
 };
 #endif // !_BLOCK_H_

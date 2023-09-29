@@ -17,6 +17,7 @@
 // 前方宣言
 //*****************************************************
 class CObject2D;
+class CCollisionSphere;
 
 //*****************************************************
 // クラスの定義
@@ -49,6 +50,7 @@ private:
 	void Input(void);	// 操作処理
 	void InputJump(void);	// ジャンプ操作
 	void ManageMove(void);	// 移動の管理
+	void ManageCollision(void);	// 当たり判定管理
 	void FollowBody(void);	// 体を追従させる処理
 	void FollowTram(void);	// トロッコを追従させる処理
 	void LimitPos(void);	// 位置制限処理
@@ -57,6 +59,7 @@ private:
 	void Debug(void);	// デバッグ表示
 
 	Player m_player;	// プレイヤー情報
+	CCollisionSphere *m_pCollisionSphere;	// 球の当たり判定
 };
 
 #endif

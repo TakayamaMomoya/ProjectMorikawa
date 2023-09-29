@@ -119,6 +119,13 @@ void CGame::Uninit(void)
 		m_pTimer = nullptr;
 	}
 
+	if (m_pBlockManager != nullptr)
+	{// ブロック管理の破棄
+		m_pBlockManager->Uninit();
+
+		m_pBlockManager = nullptr;
+	}
+
 	// オブジェクト全棄
 	CObject::ReleaseAll();
 }

@@ -17,6 +17,7 @@
 #include "inputjoypad.h"
 #include "debugproc.h"
 #include "universal.h"
+#include "collision.h"
 
 //*****************************************************
 // ƒ}ƒNƒ’è‹`
@@ -83,6 +84,21 @@ HRESULT CPlayer::Init(void)
 		m_player.pTram->SetVtx();
 	}
 
+	if (m_pCollisionSphere == nullptr)
+	{// ‹…‚Ì“–‚½‚è”»’è¶¬
+		m_pCollisionSphere = CCollisionSphere::Create(CCollision::TAG_PLAYER, CCollision::TYPE_SPHERE, this);
+
+		float fRadius;
+
+		if (m_pCollisionSphere != nullptr)
+		{// î•ñ‚ÌÝ’è
+			fRadius = BODY_HEIGHT;
+
+			m_pCollisionSphere->SetPosition(GetPosition());
+			m_pCollisionSphere->SetRadius(fRadius);
+		}
+	}
+
 	return S_OK;
 }
 
@@ -103,6 +119,12 @@ void CPlayer::Uninit(void)
 		m_player.pTram = nullptr;
 	}
 
+	if (m_pCollisionSphere != nullptr)
+	{// “–‚½‚è”»’è‚Ì”jŠü
+		m_pCollisionSphere->Uninit();
+		m_pCollisionSphere = nullptr;
+	}
+
 	// Ž©g‚Ì”jŠü
 	Release();
 }
@@ -120,6 +142,9 @@ void CPlayer::Update(void)
 
 	// ˆÚ“®‚ÌŠÇ—
 	ManageMove();
+
+	// “–‚½‚è”»’èŠÇ—
+	ManageCollision();
 
 	// ˆÊ’u‚Ì§ŒÀ
 	LimitPos();
@@ -194,6 +219,19 @@ void CPlayer::ManageMove(void)
 
 	// ˆÊ’u‚ÉˆÚ“®—Ê‚ð”½‰f
 	m_player.pos += m_player.move;
+}
+
+//=====================================================
+// “–‚½‚è”»’èŠÇ—
+//=====================================================
+void CPlayer::ManageCollision(void)
+{
+	if (m_pCollisionSphere != nullptr)
+	{// ‹…‚Ì“–‚½‚è”»’è‚ÌŠÇ—
+		m_pCollisionSphere->SetPositionOld(m_pCollisionSphere->GetPosition());
+
+		m_pCollisionSphere->SetPosition(m_player.pos);
+	}
 }
 
 //=====================================================
