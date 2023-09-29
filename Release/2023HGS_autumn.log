@@ -1,47 +1,9 @@
-﻿  animation2D.cpp
-  bg.cpp
-  billboard.cpp
-  block.cpp
-  camera.cpp
-  collision.cpp
-  debugproc.cpp
-  effect2D.cpp
-  effect3D.cpp
-  fade.cpp
-  game.cpp
-  input.cpp
-  inputjoypad.cpp
-  inputkeyboard.cpp
-  inputmouse.cpp
-  light.cpp
-  main.cpp
-  manager.cpp
-  model.cpp
-  motion.cpp
-  コンパイル中...
-  number.cpp
-  object.cpp
-  object2D.cpp
-  object3D.cpp
-  objectmanager.cpp
-  objectX.cpp
-  orbit.cpp
-  particle.cpp
-  parts.cpp
-  ranking.cpp
-  renderer.cpp
-  scene.cpp
-  score.cpp
-  sound.cpp
-  texture.cpp
-  timer.cpp
-  title.cpp
-  tutorial.cpp
-  universal.cpp
+﻿  game.cpp
+  player.cpp
   コード生成しています。
-  377 of 381 functions (99.0%) were compiled, the rest were copied from previous compilation.
-    6 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  13 of 387 functions ( 3.4%) were compiled, the rest were copied from previous compilation.
+    12 functions were new in current compilation
+    48 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
-  2023HGS_autumn.vcxproj -> C:\Users\student\Source\Repos\TakayamaMomoya\ProjectMorikawa\2023HGS_autumn.exe
-  2023HGS_autumn.vcxproj -> C:\Users\student\Source\Repos\TakayamaMomoya\ProjectMorikawa\2023HGS_autumn.pdb (Full PDB)
+  2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn\2023HGS_autumn.exe
+  2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn\2023HGS_autumn.pdb (Full PDB)

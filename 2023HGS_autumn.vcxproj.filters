@@ -129,8 +129,8 @@
     <ClCompile Include="universal.cpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="block.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="player.cpp">
+      <Filter>ヘッダー ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,8 +248,8 @@
     <ClInclude Include="universal.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="block.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="player.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

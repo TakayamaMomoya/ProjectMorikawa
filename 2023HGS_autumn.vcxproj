@@ -183,6 +183,7 @@
     <ClCompile Include="orbit.cpp" />
     <ClCompile Include="particle.cpp" />
     <ClCompile Include="parts.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="ranking.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="scene.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="orbit.h" />
     <ClInclude Include="particle.h" />
     <ClInclude Include="parts.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="ranking.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="scene.h" />
