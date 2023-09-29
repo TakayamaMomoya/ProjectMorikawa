@@ -20,8 +20,8 @@
 #define BG_FRONT	"data\\TEXTURE\\BG\\bg000.png"	        // 一番前の背景
 #define BG_MIDDLE	"data\\TEXTURE\\BG\\bg001.png"	        // 真ん中の背景
 #define BG_BACK	    "data\\TEXTURE\\BG\\bg002.png"	        // 一番後ろの背景
-#define BG_MIDSPEED  (0.002f)                               // 真ん中の背景の速度
-#define BG_FROSPEED  (0.003f)                               // 一番前の背景の速度
+#define BG_MIDSPEED  (0.0012f)                               // 真ん中の背景の速度
+#define BG_FROSPEED  (0.0013f)                               // 一番前の背景の速度
 
 //*****************************************************
 // 静的メンバ変数宣言
