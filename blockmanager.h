@@ -42,6 +42,7 @@ public:
 	void SetSpeed(const float fSpeed) { m_fSpeed = fSpeed; }		//スクロール速度設定
 
 private:
+	static const int m_aUpDown[BLOCK_CREATE_NUM - MAX_NEEDLE + 2][2];	//高さ変動確率
 	CBlock* m_apBlock[BLOCK_CREATE_NUM];	//最近配置したブロックオブジェ
 	float m_fSpeed;							//ブロックスクロール速度
 	int m_nNeedleHeight;					//とげを置く高さ

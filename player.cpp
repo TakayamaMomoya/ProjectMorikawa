@@ -35,7 +35,7 @@
 #define GRAVITY	(0.98f)	// 重力
 #define CHARGE_POWER	(0.010f)	// 1フレームあたりに溜まるジャンプ力
 #define CHARGE_INTIIAL	(0.5f)	// 初動のジャンプ力
-#define MAX_CHARGE	(1.0f)	// チャージの最大値
+#define MAX_CHARGE	(0.5f)	// チャージの最大値
 #define JUMP_BUTTON	(DIK_SPACE)	// ジャンプキー
 #define ROLL_SPEED	(0.6f)	// 回転速度
 
@@ -188,11 +188,6 @@ void CPlayer::InputJump(void)
 		return;
 	}
 
-	if (pKeyboard->GetTrigger(JUMP_BUTTON))
-	{// ジャンプ溜め初動
-		m_player.fPowJump += CHARGE_INTIIAL;
-	}
-
 	if (pKeyboard->GetPress(JUMP_BUTTON))
 	{// ジャンプ溜め
 		m_player.fPowJump += CHARGE_POWER;
@@ -205,7 +200,7 @@ void CPlayer::InputJump(void)
 
 	if (pKeyboard->GetRelease(JUMP_BUTTON))
 	{// ジャンプ操作
-		m_player.move.y -= MAX_JUMP * m_player.fPowJump;
+		m_player.move.y -= MAX_JUMP * (m_player.fPowJump + CHARGE_INTIIAL);
 
 		m_player.fPowJump = 0.0f;
 
