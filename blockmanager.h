@@ -33,7 +33,7 @@ public:
 	void Uninit(void);	// 終了処理
 	void Update(void);	// 更新処理
 	void Draw(void);	// 描画処理
-	static CBlockManager *Create(int nPriority = PRIORITY_DEFAULT);	// 生成処理
+	static CBlockManager *Create(int nPriority = PRIORITY_04);		// 生成処理
 
 	//取得
 	float GetSpeed(void) { return m_fSpeed; }						//スクロール速度取得

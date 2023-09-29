@@ -24,8 +24,8 @@
 //*****************************************************
 // マクロ定義
 //*****************************************************
-#define LOGO_PATH	"data\\TEXTURE\\UI\\logo000.png"	// ロゴのパス
-#define START_PATH	"data\\TEXTURE\\UI\\start.png"	// スタート表示のパス
+#define LOGO_PATH	"data\\TEXTURE\\UI\\TitleLogo.png"	// ロゴのパス
+#define START_PATH	"data\\TEXTURE\\UI\\start.png"		// スタート表示のパス
 #define START_WIDTH	(200.0f)	// スタート表示の幅
 #define START_HEIGHT	(50.0f)	// スタート表示の高さ
 #define DEST_WIDTH	(500.0f)	// スタート表示の幅
@@ -56,7 +56,7 @@ HRESULT CTitle::Init(void)
 {
 	// ロゴの生成
 	CObject2D *pObject2D = CObject2D::Create(7);
-	pObject2D->SetSize(875.0f * 0.45f, 320.0f * 0.45f);
+	pObject2D->SetSize(620.0f * 0.5f, 308.0f * 0.5f);
 	pObject2D->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.7f, 200.0f, 0.0f));
 
 	int nIdx = CManager::GetTexture()->Regist(LOGO_PATH);
