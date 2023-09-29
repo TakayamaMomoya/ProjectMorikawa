@@ -18,6 +18,7 @@
 //*****************************************************
 class CScore;
 class CTimer;
+class CPlayer;
 class CGame;
 class CBlockManager;
 
@@ -45,6 +46,7 @@ public:
 	virtual void Draw();
 	static CScore *GetScore(void) { return m_pScore; }
 	static CTimer *GetTimer(void) { return m_pTimer; }
+	static CPlayer *GetPlayer(void) { return m_pPlayer; }
 	static CBlockManager *GetBlockManager(void) { return m_pBlockManager; }
 	static void ReleaseScore(void);
 	static void ReleaseTimer(void);
@@ -54,6 +56,7 @@ public:
 private:
 	static CScore *m_pScore;	// スコアのポインタ
 	static CTimer *m_pTimer;	// タイマーのポインタ
+	static CPlayer *m_pPlayer;	// プレイヤーのポインタ
 	static CBlockManager *m_pBlockManager;	//ブロックマネージャ
 	static STATE m_state;	// 状態
 };

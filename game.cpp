@@ -39,6 +39,7 @@
 //*****************************************************
 CScore *CGame::m_pScore = nullptr;	// スコアのポインタ
 CTimer *CGame::m_pTimer = nullptr;	// タイマーのポインタ
+CPlayer *CGame::m_pPlayer = nullptr;	// プレイヤーのポインタ
 CBlockManager *CGame::m_pBlockManager = nullptr;	//ブロックマネージャのポインタ
 CGame::STATE CGame::m_state = STATE_NONE;
 
@@ -87,8 +88,11 @@ HRESULT CGame::Init(void)
 		m_pBlockManager->SetSpeed(BLOCK_SPEED);
 	}
 
-	// プレイヤー生成
-	CPlayer::Create();
+	if (m_pPlayer == nullptr)
+	{
+		// プレイヤー生成
+		m_pPlayer = CPlayer::Create();
+	}
 
 	return S_OK;
 }
@@ -110,6 +114,13 @@ void CGame::Uninit(void)
 		m_pTimer->Uninit();
 
 		m_pTimer = nullptr;
+	}
+
+	if (m_pPlayer != nullptr)
+	{// プレイヤーの終了・破棄
+		m_pPlayer->Uninit();
+
+		m_pPlayer = nullptr;
 	}
 
 	if (m_pBlockManager != nullptr)
