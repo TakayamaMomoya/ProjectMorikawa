@@ -20,7 +20,7 @@ const char* g_apFilePath[CBlock::TYPE_MAX] =
 	"data\\TEXTURE\\BLOCK\\block_00.png",
 	"data\\TEXTURE\\BLOCK\\bonusblock.png",
 	"data\\TEXTURE\\BLOCK\\damageblock.png",
-	"data\\TEXTURE\\Block_R_03.png"
+	"data\\TEXTURE\\BLOCK\\bedrock.png"
 };
 
 //=====================================

@@ -61,7 +61,7 @@ void CDebrisSpawner::Update(void)
 
 	char *aPath[TYPE_MAX] = 
 	{
-		"data\\TEXTURE\\BLOCK\\fragment.png",
+		"data\\TEXTURE\\BLOCK\\fragment00.png",
 		"data\\TEXTURE\\BLOCK\\fragment01.png",
 	};
 
