@@ -99,8 +99,6 @@ void CTitle::Update(void)
 {
 	// 情報取得
 	CInputKeyboard *pKeyboard = CManager::GetKeyboard();
-	CInputMouse *pMouse = CManager::GetMouse();
-	CInputJoypad *pJoypad = CManager::GetJoypad();
 
 	CCamera *pCamera = CManager::GetCamera();
 
@@ -111,15 +109,13 @@ void CTitle::Update(void)
 
 	if (m_state == STATE_NONE)
 	{
-		if (pKeyboard != nullptr && pMouse != nullptr)
+		if (pKeyboard != nullptr)
 		{
-			if (pKeyboard->GetTrigger(DIK_RETURN) ||
-				pMouse->GetTrigger(CInputMouse::BUTTON_LMB) ||
-				pJoypad->GetTrigger(CInputJoypad::PADBUTTONS_A, 0))
+			if (pKeyboard->GetTrigger(DIK_RETURN))
 			{// フェード
 				if (pFade != nullptr)
 				{
-					pFade->SetFade(CScene::MODE_GAME);
+					pFade->SetFade(CScene::MODE_TUTORIAL);
 				}
 			}
 		}
