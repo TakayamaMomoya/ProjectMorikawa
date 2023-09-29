@@ -41,6 +41,8 @@ CScore *CGame::m_pScore = nullptr;	// スコアのポインタ
 CTimer *CGame::m_pTimer = nullptr;	// タイマーのポインタ
 CPlayer *CGame::m_pPlayer = nullptr;	// プレイヤーのポインタ
 CBlockManager *CGame::m_pBlockManager = nullptr;	//ブロックマネージャのポインタ
+CObject2D* CGame::m_pResult = nullptr;		//リザルト文字のポインタ
+CNumber* CGame::m_pResultScore = nullptr;	//リザルトスコアのポインタ
 CGame::STATE CGame::m_state = STATE_NONE;
 
 //=====================================================
@@ -172,24 +174,38 @@ void CGame::Update(void)
 	// シーンの更新
 	CScene::Update();
 
-	if (pKeyboard != nullptr)
-	{
-		if (pKeyboard->GetTrigger(DIK_RETURN))
-		{
-			if (pFade != nullptr)
-			{
-				pFade->SetFade(CScene::MODE_RANKING);
-			}
-		}
-	}
 	if (m_pTimer->GetSecond() <= 0)
 	{
 		if (m_pScore != nullptr)
 		{// スコア保存
 			CManager::SetScore(m_pScore->GetScore());
 		}
+		m_pBlockManager->SetSpeed(0.0f);
 
-		pFade->SetFade(CScene::MODE_RANKING);
+		CPlayer::Player* pPlayerInfo = m_pPlayer->GetInfo();
+		if (pPlayerInfo->pos.x - pPlayerInfo->pTram->GetWidth() >= SCREEN_WIDTH && pFade->GetState() == CFade::FADE_NONE)
+		{//画面外に出た
+			if (m_pResult == nullptr && m_pResultScore == nullptr)
+			{//リザルト表示
+				//リザルト文字
+				m_pResult = CObject2D::Create(CObject::PRIORITY_UI);
+				m_pResult->SetSize(444.0f, 78.0f);
+				m_pResult->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, 300.0f, 0.0f));
+				m_pResult->SetIdxTexture(CManager::GetTexture()->Regist("data\\TEXTURE\\UI\\yourscore.png"));
+				m_pResult->SetVtx();
+
+				//リザルトスコア
+				m_pResultScore = CNumber::Create(6, m_pScore->GetScore());
+				m_pResultScore->SetPosition(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, 420.0f, 0.0f));
+				m_pResultScore->SetSizeAll(40.0f, 40.0f);
+
+			}
+
+			if (pKeyboard != nullptr && pKeyboard->GetTrigger(DIK_RETURN) && pFade != nullptr)
+			{//ランキング遷移
+				pFade->SetFade(CScene::MODE_RANKING);
+			}
+		}
 	}
 }
 

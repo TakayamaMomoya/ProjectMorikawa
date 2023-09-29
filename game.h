@@ -21,6 +21,8 @@ class CTimer;
 class CPlayer;
 class CGame;
 class CBlockManager;
+class CNumber;
+class CObject2D;
 
 //*****************************************************
 // クラスの定義
@@ -58,6 +60,8 @@ private:
 	static CTimer *m_pTimer;	// タイマーのポインタ
 	static CPlayer *m_pPlayer;	// プレイヤーのポインタ
 	static CBlockManager *m_pBlockManager;	//ブロックマネージャ
+	static CObject2D* m_pResult;	//リザルト文字
+	static CNumber* m_pResultScore;	//リザルトのスコア
 	static STATE m_state;	// 状態
 };
 
