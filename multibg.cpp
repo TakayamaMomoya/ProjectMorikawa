@@ -13,6 +13,7 @@
 #include "manager.h"
 #include "renderer.h"
 #include "texture.h"
+#include "game.h"
 
 //*****************************************************
 // ƒ}ƒNƒ’è‹`
@@ -141,23 +142,24 @@ void CMultiBg::Uninit(void)
 void CMultiBg::Update(void)
 {
 	m_fSpeedU = 0.001f;
+	float fSpeed = CGame::GetGameSpeed();
 
 	// ˆê”ÔŒã‚ë‚Ì”wŒi
-	m_texBackLeftUp.x += m_fSpeedU;
+	m_texBackLeftUp.x += m_fSpeedU * fSpeed;
 	m_texBackLeftUp.y += m_fSpeedV;
-	m_texBackRightDown.x += m_fSpeedU;
+	m_texBackRightDown.x += m_fSpeedU * fSpeed;
 	m_texBackRightDown.y += m_fSpeedV;
 
 	// ^‚ñ’†‚Ì”wŒi
-	m_texMiddleLeftUp.x += (m_fSpeedU + BG_MIDSPEED);
+	m_texMiddleLeftUp.x += (m_fSpeedU + BG_MIDSPEED) * fSpeed;
 	m_texMiddleLeftUp.y += m_fSpeedV;
-	m_texMiddleRightDown.x += (m_fSpeedU + BG_MIDSPEED);
+	m_texMiddleRightDown.x += (m_fSpeedU + BG_MIDSPEED) * fSpeed;
 	m_texMiddleRightDown.y += m_fSpeedV;
 
 	// ˆê”Ô‘O‚Ì”wŒi
-	m_texFrontLeftUp.x += (m_fSpeedU + BG_FROSPEED);
+	m_texFrontLeftUp.x += (m_fSpeedU + BG_FROSPEED) * fSpeed;
 	m_texFrontLeftUp.y += m_fSpeedV;
-	m_texFrontRightDown.x += (m_fSpeedU + BG_FROSPEED);
+	m_texFrontRightDown.x += (m_fSpeedU + BG_FROSPEED) * fSpeed;
 	m_texFrontRightDown.y += m_fSpeedV;
 
 	if (m_texBackLeftUp.x > 1.0f)

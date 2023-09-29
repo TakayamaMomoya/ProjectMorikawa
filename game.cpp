@@ -45,7 +45,8 @@ CBlockManager *CGame::m_pBlockManager = nullptr;	//ブロックマネージャのポインタ
 CMultiBg *CGame::m_pMultiBg = nullptr;
 CObject2D* CGame::m_pResult = nullptr;		//リザルト文字のポインタ
 CNumber* CGame::m_pResultScore = nullptr;	//リザルトスコアのポインタ
-CGame::STATE CGame::m_state = STATE_NONE;
+CGame::STATE CGame::m_state = STATE_NONE;	// ゲーム状態
+float CGame::m_fGameSpeed = 0.0f;	// ゲームスピード
 
 //=====================================================
 // コンストラクタ
@@ -68,6 +69,8 @@ CGame::~CGame()
 //=====================================================
 HRESULT CGame::Init(void)
 {
+	m_fGameSpeed = 1.0f;
+
 	CObjectManager *pObjManager = CManager::GetObjectManager();
 
 	if (m_pMultiBg == nullptr)
@@ -194,6 +197,8 @@ void CGame::Update(void)
 		{// スコア保存
 			CManager::SetScore(m_pScore->GetScore());
 		}
+		m_fGameSpeed = 0.0f;
+
 		m_pBlockManager->SetSpeed(0.0f);
 
 		CPlayer::Player* pPlayerInfo = m_pPlayer->GetInfo();

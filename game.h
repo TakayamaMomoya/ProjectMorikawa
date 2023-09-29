@@ -55,6 +55,7 @@ public:
 	static void ReleaseTimer(void);
 	static void SetState(STATE state) { m_state = state; }
 	static STATE GetState(void) { return m_state; }
+	static float GetGameSpeed(void) { return m_fGameSpeed; }
 
 private:
 	static CScore *m_pScore;	// スコアのポインタ
@@ -65,6 +66,7 @@ private:
 	static CObject2D* m_pResult;	//リザルト文字
 	static CNumber* m_pResultScore;	//リザルトのスコア
 	static STATE m_state;	// 状態
+	static float m_fGameSpeed;	// ゲームのスピード
 };
 
 #endif
