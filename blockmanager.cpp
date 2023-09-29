@@ -90,6 +90,16 @@ void CBlockManager::Update(void)
 	//ブロックがすべて表示された
 	if (bNotDisp == false)
 	{//生成
+		float fDistance;
+		if (m_apBlock[0] != nullptr)
+		{//前回の配置がある
+			fDistance = SCREEN_WIDTH - (m_apBlock[0]->GetPosition().x + m_apBlock[0]->GetWidth());
+		}
+		else
+		{//初期5
+			fDistance = 0.0f;
+		}
+
 		//ボーナス出現タイミングの時はボーナスの場所を設定
 		int nBonus = -1;
 		if (m_nSpawnBonus <= 0)
@@ -102,7 +112,7 @@ void CBlockManager::Update(void)
 		{//最大数分生成
 			m_apBlock[cnt] = CBlock::Create();
 			m_apBlock[cnt]->SetSize(32.0f, 32.0f);
-			m_apBlock[cnt]->SetPosition(D3DXVECTOR3(SCREEN_WIDTH + 32.0f, BLOCK_START_HEIGHT + (cnt * 32.0f * 2.0f), 0.0f));
+			m_apBlock[cnt]->SetPosition(D3DXVECTOR3(SCREEN_WIDTH + 32.0f - fDistance, BLOCK_START_HEIGHT + (cnt * 32.0f * 2.0f), 0.0f));
 
 			//ブロック種類設定
 			int nIdx;
