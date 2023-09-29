@@ -32,6 +32,7 @@
 //*****************************************************
 // マクロ定義
 //*****************************************************
+#define BLOCK_SPEED	(3.0f)	// ブロックの流れる速度
 
 //*****************************************************
 // 静的メンバ変数宣言
@@ -84,7 +85,7 @@ HRESULT CGame::Init(void)
 	if (m_pBlockManager == nullptr)
 	{//ブロックマネージャ生成
 		m_pBlockManager = CBlockManager::Create();
-		m_pBlockManager->SetSpeed(1.0f);
+		m_pBlockManager->SetSpeed(BLOCK_SPEED);
 	}
 
 	// プレイヤー生成

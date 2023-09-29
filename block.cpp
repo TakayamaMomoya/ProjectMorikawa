@@ -8,11 +8,14 @@
 #include "block.h"
 #include "blockmanager.h"
 #include "collision.h"
+#include "debrisspawner.h"
+#include "score.h"
 
 //*****************************************************
 // マクロ定義
 //*****************************************************
 #define SIZE_DEFAULT	(32.0f)	// デフォルトのサイズ
+#define NORMAL_SCORE	(720)	// 通常スコア
 
 //=====================================
 //コンストラクタ
@@ -84,6 +87,18 @@ void CBlock::Update(void)
 	CObject2D::Update();									//親処理
 	CObject2D::SetVtx();									//頂点移動
 
+	// 当たり判定の管理
+	ManageCollision();
+}
+
+//=====================================
+// 当たり判定管理
+//=====================================
+void CBlock::ManageCollision(void)
+{
+	// スコア取得
+	CScore *pScore = CGame::GetScore();
+
 	if (m_pCollisionSphere != nullptr)
 	{// 球の当たり判定の管理
 		m_pCollisionSphere->SetPositionOld(m_pCollisionSphere->GetPosition());
@@ -92,6 +107,13 @@ void CBlock::Update(void)
 
 		if (m_pCollisionSphere->IsTriggerEnter(CCollision::TAG_PLAYER))
 		{// 対象との当たり判定
+			CDebrisSpawner::Create(GetPosition(), 10.0f, 2, 3);
+
+			if (pScore != nullptr)
+			{
+				pScore->AddScore(NORMAL_SCORE);
+			}
+
 			Uninit();
 		}
 	}

@@ -32,7 +32,7 @@ CParticle::CParticle(int nPriority) : CObject(nPriority)
 }
 
 //=====================================================
-//	デストラクタ
+// デストラクタ
 //=====================================================
 CParticle::~CParticle()
 {
@@ -40,7 +40,7 @@ CParticle::~CParticle()
 }
 
 //=====================================================
-//	初期化処理
+// 初期化処理
 //=====================================================
 HRESULT CParticle::Init(void)
 {
@@ -48,7 +48,7 @@ HRESULT CParticle::Init(void)
 }
 
 //=====================================================
-//	終了処理
+// 終了処理
 //=====================================================
 void CParticle::Uninit(void)
 {
@@ -56,7 +56,7 @@ void CParticle::Uninit(void)
 }
 
 //=====================================================
-//	破棄処理
+// 破棄処理
 //=====================================================
 void CParticle::Unload(void)
 {
@@ -101,7 +101,6 @@ void CParticle::Update(void)
 		else
 		{// 全方位
 			fRot = rand() % 628 - 314 / 100.0f;
-			fRot2 = rand() % 628 - 314 / 100.0f;
 		}
 
 		if (m_apParticleInfo[m_type]->fSpeed > 0.1f)
@@ -117,9 +116,9 @@ void CParticle::Update(void)
 			nLife = rand() % m_apParticleInfo[m_type]->nLifeEffect + m_apParticleInfo[m_type]->nLifeEffect / 2;
 		}
 
-		move.x = sinf(fRot) * sinf(fRot2) * fMove;
+		move.x = sinf(fRot) *fMove;
 		move.y = cosf(fRot) * fMove;
-		move.z = sinf(fRot) * cosf(fRot2) * fMove;
+		move.z = 0.0f;
 
 		if (m_apParticleInfo[m_type]->bTurn)
 		{
