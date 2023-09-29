@@ -103,10 +103,10 @@ void CArrow::DispCharge(void)
 	D3DXCOLOR col = { 1.0f,1.0f,1.0f,1.0f };
 
 	// タメ具合によるサイズ設定
-	fSize = HEIGHT - CHARGE_HEIGHT * pPlayerInfo->fPowJump;
+	fSize = HEIGHT - CHARGE_HEIGHT * pPlayerInfo->fPowJump * 2;
 
-	col.g = 1.0f - pPlayerInfo->fPowJump;
-	col.b = 1.0f - pPlayerInfo->fPowJump;
+	col.g = 1.0f - pPlayerInfo->fPowJump * 2;
+	col.b = 1.0f - pPlayerInfo->fPowJump * 2;
 
 	// サイズ設定
 	SetSize(GetWidth(),fSize);
