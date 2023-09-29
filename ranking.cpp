@@ -18,6 +18,7 @@
 #include "object.h"
 #include "manager.h"
 #include "texture.h"
+#include "multibg.h"
 
 //*****************************************************
 // ƒ}ƒNƒ’è‹`
@@ -62,6 +63,9 @@ CRanking::~CRanking()
 //=====================================================
 HRESULT CRanking::Init(void)
 {
+	// ‘½d”wŒi‚Ì¶¬
+	CMultiBg *pMultiBg = CMultiBg::Create();
+
 	// €–Ú‚Ì¶¬
 	CObject2D *pObject2D = CObject2D::Create();
 	pObject2D->SetSize(300.0f,90.0f);

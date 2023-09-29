@@ -47,7 +47,7 @@ CMultiBg *CGame::m_pMultiBg = nullptr;
 CObject2D* CGame::m_pResult = nullptr;		//リザルト文字のポインタ
 CNumber* CGame::m_pResultScore = nullptr;	//リザルトスコアのポインタ
 CGame::STATE CGame::m_state = STATE_NONE;	// ゲーム状態
-float CGame::m_fGameSpeed = 0.0f;	// ゲームスピード
+float CGame::m_fGameSpeed = 1.0f;	// ゲームスピード
 
 //=====================================================
 // コンストラクタ

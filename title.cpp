@@ -20,6 +20,7 @@
 #include "camera.h"
 #include "renderer.h"
 #include "sound.h"
+#include "multibg.h"
 
 //*****************************************************
 // ƒ}ƒNƒ’è‹`
@@ -54,6 +55,9 @@ CTitle::~CTitle()
 //=====================================================
 HRESULT CTitle::Init(void)
 {
+	// ‘½d”wŒi‚Ì¶¬
+	CMultiBg *pMultiBg = CMultiBg::Create();
+
 	// ƒƒS‚Ì¶¬
 	CObject2D *pObject2D = CObject2D::Create(7);
 	pObject2D->SetSize(620.0f * 0.5f, 308.0f * 0.5f);
