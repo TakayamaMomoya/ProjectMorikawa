@@ -111,6 +111,8 @@ HRESULT CGame::Init(void)
 
 	pSound->Play(CSound::LABELTRAM_SE);
 
+	pSound->Play(CSound::LABEL_GAME);
+
 	return S_OK;
 }
 
@@ -119,6 +121,10 @@ HRESULT CGame::Init(void)
 //=====================================================
 void CGame::Uninit(void)
 {
+	CSound *pSound = CManager::GetSound();
+
+	pSound->Stop();
+
 	if (m_pMultiBg != nullptr)
 	{// ‘½d”wŒi‚ÌI—¹E”jŠü
 		m_pMultiBg->Uninit();

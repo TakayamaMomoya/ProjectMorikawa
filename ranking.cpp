@@ -20,6 +20,7 @@
 #include "texture.h"
 #include "multibg.h"
 #include "game.h"
+#include "sound.h"
 
 //*****************************************************
 // マクロ定義
@@ -64,6 +65,9 @@ CRanking::~CRanking()
 //=====================================================
 HRESULT CRanking::Init(void)
 {
+	// サウンドの情報を取得
+	CSound *pSound = CManager::GetSound();
+
 	//背景のスクロールスピード設定
 	CGame::SetSpeed(1.0f);
 
@@ -98,6 +102,8 @@ HRESULT CRanking::Init(void)
 	// 保存
 	Save();
 
+	pSound->Play(CSound::LABEL_TITLE);
+
 	return S_OK;
 }
 
@@ -106,6 +112,10 @@ HRESULT CRanking::Init(void)
 //=====================================================
 void CRanking::Uninit(void)
 {
+	CSound *pSound = CManager::GetSound();
+
+	pSound->Stop();
+
 	CObject::ReleaseAll();
 }
 
