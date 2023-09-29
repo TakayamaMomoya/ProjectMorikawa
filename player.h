@@ -32,6 +32,7 @@ public:
 		D3DXVECTOR3 posOld;	// 前回の位置
 		D3DXVECTOR3 move;	// 移動量
 		float fPowJump;	// ジャンプカウンター
+		bool bJump;	// ジャンプフラグ
 	};
 
 	CPlayer(int nPriority = 4);	// コンストラクタ
@@ -46,10 +47,13 @@ public:
 
 private:
 	void Input(void);	// 操作処理
+	void InputJump(void);	// ジャンプ操作
 	void ManageMove(void);	// 移動の管理
 	void FollowBody(void);	// 体を追従させる処理
 	void FollowTram(void);	// トロッコを追従させる処理
 	void LimitPos(void);	// 位置制限処理
+	void Land(void);	// 着地処理
+	void ManageRoll(void);	// 回転の管理
 	void Debug(void);	// デバッグ表示
 
 	Player m_player;	// プレイヤー情報

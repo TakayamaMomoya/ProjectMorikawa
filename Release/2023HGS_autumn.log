@@ -1,8 +1,8 @@
 ﻿  player.cpp
   コード生成しています。
-  4 of 397 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+  4 of 405 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
 camera.obj : warning LNK4099: PDB 'vc140.pdb' が 'camera.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 debugproc.obj : warning LNK4099: PDB 'vc140.pdb' が 'debugproc.obj' で、または 'C:\Users\student\Desktop\2023HGS_autumn\vc140.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
