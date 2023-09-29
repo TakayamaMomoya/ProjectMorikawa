@@ -21,10 +21,14 @@
 // マクロ定義
 //*****************************************************
 #define BODY_PATH	"data\\TEXTURE\\CHARACTER\\player.png"	// 見た目のパス
+#define TRAM_PATH	"data\\TEXTURE\\CHARACTER\\tram.png"	// トロッコのパス
+#define FLOOR_LIMIT	(SCREEN_HEIGHT * 0.9f)	// 床の制限
 #define BODY_WIDTH	(50.0f)	// 体の幅
 #define BODY_HEIGHT	(100.0f)	// 体の高さ
+#define TRAM_WIDTH	(100.0f)	// トロッコの幅
+#define TRAM_HEIGHT	(50.0f)	// トロッコの高さ
+#define TRAM_POSY	(FLOOR_LIMIT - TRAM_HEIGHT)	// トロッコのY座標
 #define MAX_JUMP (30.0f)	// ジャンプ力
-#define FLOOR_LIMIT	(SCREEN_HEIGHT * 0.9f)	// 床の制限
 #define GRAVITY	(0.98f)	// 重力
 #define CHARGE_POWER	(0.01f)	// 1フレームあたりに溜まるジャンプ力
 #define MAX_CHARGE	(1.0f)	// チャージの最大値
@@ -63,6 +67,18 @@ HRESULT CPlayer::Init(void)
 		m_player.pBody->SetVtx();
 	}
 
+	// トロッコの生成
+	m_player.pTram = CObject2D::Create(7);
+
+	if (m_player.pTram != nullptr)
+	{
+		m_player.pTram->SetSize(TRAM_WIDTH, TRAM_HEIGHT);
+		m_player.pTram->SetPosition(D3DXVECTOR3(m_player.pos.x, TRAM_POSY, 0.0f));
+		int nIdx = CManager::GetTexture()->Regist(TRAM_PATH);
+		m_player.pTram->SetIdxTexture(nIdx);
+		m_player.pTram->SetVtx();
+	}
+
 	return S_OK;
 }
 
@@ -75,6 +91,12 @@ void CPlayer::Uninit(void)
 	{// ボディの破棄
 		m_player.pBody->Uninit();
 		m_player.pBody = nullptr;
+	}
+
+	if (m_player.pTram != nullptr)
+	{// トロッコの破棄
+		m_player.pTram->Uninit();
+		m_player.pTram = nullptr;
 	}
 
 	// 自身の破棄
@@ -98,8 +120,11 @@ void CPlayer::Update(void)
 	// 位置の制限
 	LimitPos();
 
-	// 体の見た目を追従させる
+	// 体の追従
 	FollowBody();
+
+	// トロッコの追従
+	FollowTram();
 }
 
 //=====================================================
@@ -146,7 +171,7 @@ void CPlayer::ManageMove(void)
 }
 
 //=====================================================
-// 体の見た目を追従させる処理
+// 体を追従させる処理
 //=====================================================
 void CPlayer::FollowBody(void)
 {
@@ -161,6 +186,24 @@ void CPlayer::FollowBody(void)
 	pBody->SetPosition(m_player.pos);
 
 	pBody->SetVtx();
+}
+
+//=====================================================
+// 体を追従させる処理
+//=====================================================
+void CPlayer::FollowTram(void)
+{
+	CObject2D *pTram = m_player.pTram;
+
+	if (pTram == nullptr)
+	{
+		return;
+	}
+
+	// 位置を合わせる
+	pTram->SetPosition(D3DXVECTOR3(m_player.pos.x, TRAM_POSY, 0.0f));
+
+	pTram->SetVtx();
 }
 
 //=====================================================

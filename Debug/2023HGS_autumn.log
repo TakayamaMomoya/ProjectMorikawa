@@ -1,3 +1,3 @@
 ﻿  player.cpp
-  2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn\2023HGS_autumn.exe
-  2023HGS_autumn.vcxproj -> C:\Users\student\Desktop\2023HGS_autumn\2023HGS_autumn.pdb (Full PDB)
+c:\users\student\desktop\2023hgs_autumn\player.cpp : fatal error C1041: プログラム データベース 'C:\Users\student\Desktop\2023HGS_autumn\Debug\vc140.idb' を開けません。複数の CL.EXE が同じ .PDB ファイルに書き込む場合、/FS を使用してください。
+cl : コマンド ライン warning D9028: 簡易リビルド時のエラーです、通常のビルドに戻します
